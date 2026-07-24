@@ -1,0 +1,20 @@
+<?php
+require_once __DIR__ . '/abonnements/acteurs_repartitions.php';
+require_once __DIR__ . '/abonnements/abonnements.php';
+require_once __DIR__ . '/abonnements/types_abonnement.php';
+require_once __DIR__ . '/administration/administrateurs.php';
+require_once __DIR__ . '/carrousel/carrousel_medias.php';
+require_once __DIR__ . '/evenements/evenements.php';
+require_once __DIR__ . '/evenements/evenement_medias.php';
+require_once __DIR__ . '/reversements/acteurs_reversement.php';
+require_once __DIR__ . '/sites touristiques/site_frais_supplementaires.php';
+require_once __DIR__ . '/sites touristiques/site_horaires.php';
+require_once __DIR__ . '/sites touristiques/site_medias.php';
+require_once __DIR__ . '/sites touristiques/site_tarifs.php';
+require_once __DIR__ . '/sites touristiques/sites_touristiques.php';
+require_once __DIR__ . '/temoignages/temoignages.php';
+require_once __DIR__ . '/utilisateurs mobile/acteurs_mobile.php';
+require_once __DIR__ . '/utilisateurs mobile/catalogue_articles.php';
+require_once __DIR__ . '/utilisateurs mobile/catalogue_medias.php';
+require_once __DIR__ . '/utilisateurs mobile/utilisateurs_mobile.php';
+require_once __DIR__ . '/visiteurs/visiteurs.php';
