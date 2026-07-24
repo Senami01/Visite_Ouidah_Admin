@@ -43,6 +43,7 @@ class FieldName
     public const DATE_FIN = 'date_fin';
     public const DATE_PUBLICATION = 'date_publication';
     public const DATE_RECEPTION_CHEQUE = 'date_reception_cheque';
+    public const DATE_TRAITEMENT = 'date_traitement';
     public const DATE_TRANSACTION = 'date_transaction';
     public const DATE_VIREMENT_REEL = 'date_virement_reel';
     public const DENOMINATION = 'denomination';
@@ -58,6 +59,7 @@ class FieldName
     public const EST_COUVERTURE ='est_couverture';
     public const EVENEMENT_ID = 'evenement_id';
     public const FERMETURE = 'fermeture';
+    public const FICHER_JOINT = 'ficher_joint';
     public const IBAN = 'iban';
     public const ID = 'id';
     public const INTITULE_COMPTE = 'intitule_compte';
@@ -71,6 +73,8 @@ class FieldName
     public const MODE = 'mode';
     public const MONTANT = 'montant';
     public const MOT_DE_PASSE_HASH = 'mot_de_passe_hash';
+    public const MOTIF = 'motif';
+    public const MOTIF_AUTEUR_USER_MOBILE_ID = 'motif_auteur_user_mobile_id';
     public const MOYEN_PAIEMENT_ID = 'moyen_paiement_id';
     public const NOM = 'nom';
     public const NOTE = 'note';
@@ -100,6 +104,7 @@ class FieldName
     public const STATUT = 'statut';
     public const TELEPHONE = 'telephone';
     public const TITRE = 'titre';
+    public const TRAITE_PAR = 'traite_par';
     public const TRANSACTION_ID = 'transaction_id';
     public const TYPE = 'type';
     public const TYPE_ABONNEMENT_ID = 'type_abonnement_id';

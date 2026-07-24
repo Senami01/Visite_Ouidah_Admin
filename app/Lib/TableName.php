@@ -14,6 +14,7 @@ class TableName
     public const CARROUSEL_MEDIAS = 'carrousel_medias';
     public const CATALOGUE_ARTICLES = 'catalogue_articles';
     public const CATALOGUE_MEDIAS = 'catalogue_medias';
+    public const CONTESTATIONS = 'contestations';
     public const EVENEMENTS = 'evenements';
     public const EVENEMENT_MEDIAS = 'evenement_medias';
     public const SITE_FRAIS_SUPPLEMENTAIRES = 'site_frais_supplementaires';
