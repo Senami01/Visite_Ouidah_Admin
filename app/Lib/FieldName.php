@@ -58,6 +58,7 @@ class FieldName
     public const EMAIL = 'email';
     public const ENTITE = 'entite';
     public const ENTITE_ID = 'entite_id';
+    public const EPASS_ID = 'epass_id';
     public const EST_COUVERTURE ='est_couverture';
     public const EVENEMENT_ID = 'evenement_id';
     public const FERMETURE = 'fermeture';
@@ -101,6 +102,7 @@ class FieldName
     public const POURCENTAGE = 'pourcentage';
     public const PRENOM = 'prenom';
     public const PUBLIE = 'publie';
+    public const QUANTITE = 'quantite';
     public const REFERENCE = 'reference';
     public const REGLE_ID = 'regle_id';
     public const RESEAU = 'reseau';
@@ -109,6 +111,7 @@ class FieldName
     public const SITE_WEB = 'site_web';
     public const SPECIALITES = 'specialites';
     public const STATUT = 'statut';
+    public const TARIF_UNITAIRE = 'tarif_unitaire';
     public const TELEPHONE = 'telephone';
     public const TITRE = 'titre';
     public const TRAITE_PAR = 'traite_par';

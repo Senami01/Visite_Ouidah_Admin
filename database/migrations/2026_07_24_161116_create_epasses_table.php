@@ -24,7 +24,7 @@ return new class extends Migration
             $table->decimal(FieldName::MONTANT_TAXES, 10, 2);
             $table->decimal(FieldName::MONTANT_TOTAL, 10, 2);
             $table->timestamp(FieldName::DATE_CREATION);
-            $table->dateTime(FieldName::DATE_REALISATION);
+            $table->date(FieldName::DATE_REALISATION);
             $table->foreign(FieldName::ACTEUR_MOBILE_ID)->references(FieldName::ID)->on(TableName::ACTEURS_MOBILE)->onDelete('cascade');
         });
     }

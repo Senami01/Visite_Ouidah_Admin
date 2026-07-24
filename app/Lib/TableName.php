@@ -18,6 +18,7 @@ class TableName
     public const COMPTES_EXPEDITEUR = 'comptes_expediteur';
     public const CONTESTATIONS = 'contestations';
     public const EPASSES = 'epasses';
+    public const EPASS_LIGNES = 'epass_lignes';
     public const EVENEMENTS = 'evenements';
     public const EVENEMENT_MEDIAS = 'evenement_medias';
     public const SITE_FRAIS_SUPPLEMENTAIRES = 'site_frais_supplementaires';
