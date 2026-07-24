@@ -7,6 +7,7 @@ class TableName
     public const ABONNEMENTS = 'abonnements';
     public const ABONNEMENT_REPARTITIONS = 'abonnement_repartitions';
     public const ACTEURS_MOBILE = 'acteurs_mobile';
+    public const ACTEUR_MOYENS_PAIEMENT = 'acteur_moyens_paiement';
     public const ACTEURS_REVERSEMENT = 'acteurs_reversement';
     public const ADMINISTRATEURS = 'administrateurs';
     public const AVIS = 'avis';
