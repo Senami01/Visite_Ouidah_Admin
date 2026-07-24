@@ -39,9 +39,11 @@ class FieldName
     public const CREATED_BY = 'created_by';
     public const DATE_AGREMENT = 'date_agrement';
     public const DATE_BROUILLON = 'date_brouillon';
+    public const DATE_CREATION = 'date_creation';
     public const DATE_DEBUT = 'date_debut';
     public const DATE_FIN = 'date_fin';
     public const DATE_PUBLICATION = 'date_publication';
+    public const DATE_REALISATION = 'date_realisation';
     public const DATE_RECEPTION_CHEQUE = 'date_reception_cheque';
     public const DATE_TRAITEMENT = 'date_traitement';
     public const DATE_TRANSACTION = 'date_transaction';
@@ -73,6 +75,9 @@ class FieldName
     public const LONGITUDE = 'longitude';
     public const MODE = 'mode';
     public const MONTANT = 'montant';
+    public const MONTANT_HT = 'montant_ht';
+    public const MONTANT_TAXES = 'montant_taxes';
+    public const MONTANT_TOTAL = 'montant_total';
     public const MOT_DE_PASSE_HASH = 'mot_de_passe_hash';
     public const MOTIF = 'motif';
     public const MOTIF_AUTEUR_USER_MOBILE_ID = 'motif_auteur_user_mobile_id';
@@ -96,6 +101,7 @@ class FieldName
     public const POURCENTAGE = 'pourcentage';
     public const PRENOM = 'prenom';
     public const PUBLIE = 'publie';
+    public const REFERENCE = 'reference';
     public const REGLE_ID = 'regle_id';
     public const RESEAU = 'reseau';
     public const ROLE = 'role';
@@ -109,6 +115,7 @@ class FieldName
     public const TRANSACTION_ID = 'transaction_id';
     public const TYPE = 'type';
     public const TYPE_ABONNEMENT_ID = 'type_abonnement_id';
+    public const TYPE_INIATEUR = 'type_iniateur';
     public const TYPE_TARIFICATION = 'type_tarification';
     public const URL = 'url';
     public const VALIDE_PAR = 'valide_par';
