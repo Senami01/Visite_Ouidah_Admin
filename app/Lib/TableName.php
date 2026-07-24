@@ -10,6 +10,7 @@ class TableName
     public const ACTEURS_REVERSEMENT = 'acteurs_reversement';
     public const ADMINISTRATEURS = 'administrateurs';
     public const AVIS = 'avis';
+    public const AVIS_REPONSES = 'avis_reponses';
     public const CARROUSEL_MEDIAS = 'carrousel_medias';
     public const CATALOGUE_ARTICLES = 'catalogue_articles';
     public const CATALOGUE_MEDIAS = 'catalogue_medias';
