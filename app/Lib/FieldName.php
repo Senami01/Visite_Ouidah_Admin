@@ -62,6 +62,7 @@ class FieldName
     public const FICHER_JOINT = 'ficher_joint';
     public const IBAN = 'iban';
     public const ID = 'id';
+    public const INTITULE = 'intitule';
     public const INTITULE_COMPTE = 'intitule_compte';
     public const JOUR = 'jour';
     public const LANGUES_PARLEES = 'langues_parlees';
