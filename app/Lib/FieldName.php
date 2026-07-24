@@ -89,6 +89,7 @@ class FieldName
     public const NUMERO_CHEQUE = 'numero_cheque';
     public const NUMERO_COMPTE = 'numero_compte';
     public const NUMERO_MOBILE = 'numero_mobile';
+    public const NUMERO_PIECE = 'numero_piece';
     public const OBSERVATION = 'observation';
     public const ORDRE = 'ordre';
     public const ODER_ID = 'oder_id';
@@ -119,6 +120,7 @@ class FieldName
     public const TYPE = 'type';
     public const TYPE_ABONNEMENT_ID = 'type_abonnement_id';
     public const TYPE_INIATEUR = 'type_iniateur';
+    public const TYPE_PIECE = 'type_piece';
     public const TYPE_TARIFICATION = 'type_tarification';
     public const URL = 'url';
     public const VALIDE_PAR = 'valide_par';
