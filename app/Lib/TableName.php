@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Lib;
+
+class TableName
+{
+    public const ABONNEMENTS = 'abonnements';
+    public const ABONNEMENT_REPARTITIONS = 'abonnement_repartitions';
+    public const ACTEURS_MOBILE = 'acteurs_mobile';
+    public const ACTEURS_REVERSEMENT = 'acteurs_reversement';
+    public const ADMINISTRATEURS = 'administrateurs';
+    public const CARROUSEL_MEDIAS = 'carrousel_medias';
+    public const CATALOGUE_ARTICLES = 'catalogue_articles';
+    public const CATALOGUE_MEDIAS = 'catalogue_medias';
+    public const EVENEMENTS = 'evenements';
+    public const EVENEMENT_MEDIAS = 'evenement_medias';
+    public const SITE_FRAIS_SUPPLEMENTAIRES = 'site_frais_supplementaires';
+    public const SITE_HORAIRES = 'site_horaires';
+    public const SITE_MEDIAS = 'site_medias';
+    public const SITE_TARIFS = 'site_tarifs';
+    public const SITES_TOURISTIQUES = 'sites_touristiques';    
+    public const TEMOIGNAGES = 'temoignages'; 
+    public const TYPES_ABONNEMENT = 'types_abonnement';
+    public const UTILISATEURS_MOBILE = 'utilisateurs_mobile';   
+    public const VISITEURS = 'visiteurs';
+}
