@@ -48,6 +48,7 @@ class FieldName
     public const DATE_TRAITEMENT = 'date_traitement';
     public const DATE_TRANSACTION = 'date_transaction';
     public const DATE_VIREMENT_REEL = 'date_virement_reel';
+    public const DATE_VISITE = 'date_visite';
     public const DENOMINATION = 'denomination';
     public const DERNIERE_CONNEXION = 'derniere_connexion';
     public const DESCRIPTION = 'description';

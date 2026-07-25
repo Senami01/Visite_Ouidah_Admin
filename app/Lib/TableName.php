@@ -29,6 +29,7 @@ class TableName
     public const SITES_TOURISTIQUES = 'sites_touristiques';    
     public const TEMOIGNAGES = 'temoignages'; 
     public const TYPES_ABONNEMENT = 'types_abonnement';
-    public const UTILISATEURS_MOBILE = 'utilisateurs_mobile';   
+    public const UTILISATEURS_MOBILE = 'utilisateurs_mobile'; 
+    public const VISITES = 'visites';  
     public const VISITEURS = 'visiteurs';
 }
