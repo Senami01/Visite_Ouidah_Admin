@@ -26,7 +26,8 @@ class TableName
     public const SITE_HORAIRES = 'site_horaires';
     public const SITE_MEDIAS = 'site_medias';
     public const SITE_TARIFS = 'site_tarifs';
-    public const SITES_TOURISTIQUES = 'sites_touristiques';    
+    public const SITES_TOURISTIQUES = 'sites_touristiques';
+    public const TAXES = 'taxes';   
     public const TEMOIGNAGES = 'temoignages'; 
     public const TYPES_ABONNEMENT = 'types_abonnement';
     public const UTILISATEURS_MOBILE = 'utilisateurs_mobile'; 
