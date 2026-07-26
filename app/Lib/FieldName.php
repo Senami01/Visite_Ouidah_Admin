@@ -97,7 +97,7 @@ class FieldName
     public const NUMERO_PIECE = 'numero_piece';
     public const OBSERVATION = 'observation';
     public const ORDRE = 'ordre';
-    public const ODER_ID = 'oder_id';
+    public const ORDER_ID = 'order_id';
     public const OUVERTURE = 'ouverture';
     public const OUVERT_24_7 = 'ouvert_24_7';
     public const PAGE_WEB = 'page_web';
