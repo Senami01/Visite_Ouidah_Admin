@@ -5,6 +5,7 @@ namespace App\Lib;
 
 class FieldName
 {
+    public const ABONNEMENT_ID = 'abonnement_id';
     public const ACCES = 'acces';
     public const ACTEUR_MOBILE_ID = 'acteur_mobile_id';
     public const ACTEUR_REVERSEMENT_ID = 'acteur_reversement_id';
@@ -17,10 +18,12 @@ class FieldName
     public const AUTEUR = 'auteur';
     public const AUTEUR_ADMIN_ID = 'auteur_admin_id';
     public const AUTEUR_USER_MOBILE_ID = 'auteur_user_mobile_id';
+    public const AUTORISER_REVERSEMENT_ATTENTE = 'autoriser_reversement_attente';
     public const AVIS_ID = 'avis_id';
     public const A_PROPOS = 'a_propos';
     public const A_PROPOS_DESCRIPTION = 'a_propos_description';
     public const A_PROPOS_TITRE = 'a_propos_titre';
+    public const A_REVERSER = 'a_reverser';
     public const BANQUE = 'banque';
     public const CATEGORIE = 'categorie';
     public const CLE_RIB = 'cle_rib';
@@ -59,6 +62,7 @@ class FieldName
     public const EMAIL = 'email';
     public const ENTITE = 'entite';
     public const ENTITE_ID = 'entite_id';
+    public const EPASS_ATTENTE_REVERSES = 'epass_attente_reverses';
     public const EPASS_ID = 'epass_id';
     public const EST_COUVERTURE ='est_couverture';
     public const EVENEMENT_ID = 'evenement_id';
@@ -97,6 +101,7 @@ class FieldName
     public const OUVERTURE = 'ouverture';
     public const OUVERT_24_7 = 'ouvert_24_7';
     public const PAGE_WEB = 'page_web';
+    public const PART_GERANT_SITE = 'part_gerant_site';
     public const PAYS = 'pays';
     public const PERIODE_DEBUT = 'periode_debut';
     public const PERIODE_FIN = 'periode_fin';
@@ -108,6 +113,7 @@ class FieldName
     public const REFERENCE = 'reference';
     public const REGLE_ID = 'regle_id';
     public const RESEAU = 'reseau';
+    public const REVERSEMENT_ID = 'reversement_id';
     public const ROLE = 'role';
     public const SITE_ID = 'site_id';
     public const SITE_WEB = 'site_web';
