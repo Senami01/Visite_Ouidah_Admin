@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Lib\FieldName;
 use App\Lib\TableName;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\belongsTo;
 
 class Sites_Touristiques extends Model
 {
@@ -27,4 +28,9 @@ class Sites_Touristiques extends Model
         FieldName::DATE_PUBLICATION,
         FieldName::CREATED_BY
     ];
+
+    public function administrateur(): belongsTo
+    {
+        return $this->belongsTo(Administrateurs::class);
+    }
 }

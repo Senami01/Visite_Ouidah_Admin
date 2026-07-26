@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Lib\TableName;
 use App\Lib\FieldName;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Administrateurs extends Model
 {
@@ -21,4 +22,9 @@ class Administrateurs extends Model
         FieldName::STATUT,
         FieldName::DERNIERE_CONNEXION
     ];
+
+    public function sitesTouristiques(): HasMany
+    {
+        return $this->hasMany(Sites_Touristiques::class);
+    }
 }
