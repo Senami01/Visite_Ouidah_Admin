@@ -23,6 +23,7 @@ class TableName
     public const EVENEMENTS = 'evenements';
     public const EVENEMENT_MEDIAS = 'evenement_medias';
     public const REGLE_REVERSEMENT_EPASS = 'regle_reversement_epass';
+    public const REGLE_REVERSEMENT_REPARTITIONS = 'regle_reversement_repartitions';
     public const SITE_FRAIS_SUPPLEMENTAIRES = 'site_frais_supplementaires';
     public const SITE_HORAIRES = 'site_horaires';
     public const SITE_MEDIAS = 'site_medias';
