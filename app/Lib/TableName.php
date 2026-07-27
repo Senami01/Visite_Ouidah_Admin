@@ -23,6 +23,7 @@ class TableName
     public const EPASS_TAXES = 'epass_taxes';
     public const EVENEMENTS = 'evenements';
     public const EVENEMENT_MEDIAS = 'evenement_medias';
+    public const JOURNAL_ACTIVITE = 'journal_activite';
     public const REGLE_REVERSEMENT_EPASS = 'regle_reversement_epass';
     public const REGLE_REVERSEMENT_REPARTITIONS = 'regle_reversement_repartitions';
     public const REVERSEMENTS = 'reversements';
