@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Lib\TableName;
 use App\Lib\FieldName;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Contestations extends Model
 {
@@ -19,4 +20,9 @@ class Contestations extends Model
         FieldName::TRAITE_PAR,
         FieldName::DATE_TRAITEMENT        
     ];
+
+    public function administrateur(): belongsTo
+    {
+        return $this->belongsTo(Administrateurs::class, FieldName::TRAITE_PAR);
+    }
 }

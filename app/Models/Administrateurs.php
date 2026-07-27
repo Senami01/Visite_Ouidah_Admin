@@ -32,4 +32,9 @@ class Administrateurs extends Model
     {
         return $this->hasMany(Carrousel_Medias::class, FieldName::CREATED_BY);
     }
+
+    public function contestations(): HasMany
+    {
+        return $this->hasMany(Contestations::class, FieldName::TRAITE_PAR);
+    }
 }
