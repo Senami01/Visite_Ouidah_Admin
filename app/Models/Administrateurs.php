@@ -27,4 +27,9 @@ class Administrateurs extends Model
     {
         return $this->hasMany(Sites_Touristiques::class, FieldName::CREATED_BY);
     }
+
+    public function carrouselmedias(): HasMany
+    {
+        return $this->hasMany(Carrousel_Medias::class, FieldName::CREATED_BY);
+    }
 }
