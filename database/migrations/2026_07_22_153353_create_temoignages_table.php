@@ -14,13 +14,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::TEMOIGNAGES, function (Blueprint $table) {
-            $table->id();
+            $table->uuid(FieldName::ID)->primary();
             $table->string(FieldName::AUTEUR);
-            $table->unsignedBigInteger(FieldName::VISITEUR_ID);
+            $table->foreignUuid(FieldName::VISITEUR_ID)->references(FieldName::ID)->on(TableName::VISITEURS)->cascadeOnDelete();
             $table->text(FieldName::CONTENU);
             $table->integer(FieldName::NOTE);
             $table->boolean(FieldName::PUBLIE)->default(false);
-            $table->foreign(FieldName::VISITEUR_ID)->references(FieldName::ID)->on(TableName::VISITEURS)->onDelete('cascade');
             $table->timestamps();
         });
     }

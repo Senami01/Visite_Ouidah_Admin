@@ -14,13 +14,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::CATALOGUE_ARTICLES, function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger(FieldName::ACTEUR_MOBILE_ID);
+            $table->uuid(FieldName::ID)->primary();
+            $table->foreignUuid(FieldName::ACTEUR_MOBILE_ID)->references(FieldName::ID)->on(TableName::ACTEURS_MOBILE)->cascadeOnDelete();
             $table->string(FieldName::LIBELLE);
             $table->decimal(FieldName::COUT);
             $table->text(FieldName::DESCRIPTION);
             $table->string(FieldName::LIEN);
-            $table->foreign(FieldName::ACTEUR_MOBILE_ID)->references(FieldName::ID)->on(TableName::ACTEURS_MOBILE)->onDelete('cascade');
             $table->timestamps();
         });
     }

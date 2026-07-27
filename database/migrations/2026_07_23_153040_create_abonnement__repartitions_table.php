@@ -14,12 +14,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::ABONNEMENT_REPARTITIONS, function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger(FieldName::TYPE_ABONNEMENT_ID);
-            $table->unsignedBigInteger(FieldName::ACTEUR_REVERSEMENT_ID);
+            $table->uuid(FieldName::ID)->primary();
+            $table->foreignUuid(FieldName::TYPE_ABONNEMENT_ID)->references(FieldName::ID)->on(TableName::TYPES_ABONNEMENT)->cascadeOnDelete();
+            $table->foreignUuid(FieldName::ACTEUR_REVERSEMENT_ID)->references(FieldName::ID)->on(TableName::ACTEURS_REVERSEMENT)->cascadeOnDelete();
             $table->decimal(FieldName::POURCENTAGE);
-            $table->foreign(FieldName::TYPE_ABONNEMENT_ID)->references(FieldName::ID)->on(TableName::TYPES_ABONNEMENT)->onDelete('cascade');
-            $table->foreign(FieldName::ACTEUR_REVERSEMENT_ID)->references(FieldName::ID)->on(TableName::ACTEURS_REVERSEMENT)->onDelete('cascade');
         });
     }
 

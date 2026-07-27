@@ -14,12 +14,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::REGLE_REVERSEMENT_REPARTITIONS, function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger(FieldName::REGLE_ID);
-            $table->unsignedBigInteger(FieldName::ACTEUR_REVERSEMENT_ID);
+            $table->uuid(FieldName::ID)->primary();
+            $table->foreignUuid(FieldName::REGLE_ID)->references(FieldName::ID)->on(TableName::REGLE_REVERSEMENT_EPASS)->cascadeOnDelete();
+            $table->foreignUuid(FieldName::ACTEUR_REVERSEMENT_ID)->references(FieldName::ID)->on(TableName::ACTEURS_REVERSEMENT)->cascadeOnDelete();
             $table->decimal(FieldName::POURCENTAGE);
-            $table->foreign(FieldName::REGLE_ID)->references(FieldName::ID)->on(TableName::REGLE_REVERSEMENT_EPASS)->onDelete('cascade');
-            $table->foreign(FieldName::ACTEUR_REVERSEMENT_ID)->references(FieldName::ID)->on(TableName::ACTEURS_REVERSEMENT)->onDelete('cascade');
             $table->timestamps();
         });
     }

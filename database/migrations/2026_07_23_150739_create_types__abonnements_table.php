@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::TYPES_ABONNEMENT, function (Blueprint $table) {
-            $table->id();
+            $table->uuid(FieldName::ID)->primary();
             $table->string(FieldName::LIBELLE);
             $table->decimal(FieldName::MONTANT);
             $table->integer(FieldName::DUREE_JOURS);

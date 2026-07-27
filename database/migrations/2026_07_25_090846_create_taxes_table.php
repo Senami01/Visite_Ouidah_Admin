@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::TAXES, function (Blueprint $table) {
-            $table->id();
+            $table->uuid(FieldName::ID)->primary();
             $table->string(FieldName::LIBELLE);
             $table->decimal(FieldName::MONTANT);
             $table->boolean(FieldName::ACTIF);

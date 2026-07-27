@@ -15,7 +15,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::ACTEURS_MOBILE, function (Blueprint $table) {
-            $table->id();
+            $table->uuid(FieldName::ID)->primary();
             $table->enum(FieldName::TYPE, [Constant::GUIDE, Constant::AGENCE, Constant::HOTEL, Constant::RESTAURANT]);
             $table->string(FieldName::DENOMINATION);
             $table->string(FieldName::NUMERO);

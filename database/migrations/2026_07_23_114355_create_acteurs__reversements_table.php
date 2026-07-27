@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::ACTEURS_REVERSEMENT, function (Blueprint $table) {
-            $table->id();
+            $table->uuid(FieldName::ID)->primary();
             $table->string(FieldName::NOM);
             $table->boolean(FieldName::PEUT_GERER_SITE);
             $table->boolean(FieldName::ELIGIBLE_ABONNEMENT);

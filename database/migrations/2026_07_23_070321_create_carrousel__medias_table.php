@@ -15,14 +15,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::CARROUSEL_MEDIAS, function (Blueprint $table) {
-            $table->id();
+            $table->uuid(FieldName::ID)->primary();
             $table->string(FieldName::TITRE);
             $table->enum(FieldName::TYPE, [Constant::IMAGE, Constant::VIDEO]);
             $table->string(FieldName::URL);
             $table->integer(FieldName::ORDRE);
             $table->enum(FieldName::STATUT, [Constant::BROUILLON, Constant::PUBLIE, Constant::MASQUE]);
-            $table->unsignedBigInteger(FieldName::CREATED_BY);
-            $table->foreign(FieldName::CREATED_BY)->references(FieldName::ID)->on(TableName::ADMINISTRATEURS)->onDelete('cascade');
+            $table->foreignUuid(FieldName::CREATED_BY)->references(FieldName::ID)->on(TableName::ADMINISTRATEURS)->cascadeOnDelete();
             $table->timestamps();
         });
     }

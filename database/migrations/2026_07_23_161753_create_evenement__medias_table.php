@@ -15,12 +15,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::EVENEMENT_MEDIAS, function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger(FieldName::EVENEMENT_ID);
+            $table->uuid(FieldName::ID)->primary();
+            $table->foreignUuid(FieldName::EVENEMENT_ID)->references(FieldName::ID)->on(TableName::EVENEMENTS)->cascadeOnDelete();
             $table->enum(FieldName::TYPE, [Constant::IMAGE, Constant::VIDEO]);
             $table->string(FieldName::URL);
             $table->integer(FieldName::ORDRE);
-            $table->foreign(FieldName::EVENEMENT_ID)->references(FieldName::ID)->on(TableName::EVENEMENTS)->onDelete('cascade');
         });
     }
 

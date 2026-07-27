@@ -15,7 +15,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::COMPTES_EXPEDITEUR, function (Blueprint $table) {
-            $table->id();
+            $table->uuid(FieldName::ID)->primary();
             $table->enum(FieldName::MODE, [Constant::MOBILE_MONEY, Constant::VIREMENT,Constant::CHEQUE,Constant::ESPECES]);
             $table->enum(FieldName::CONFIG_MODE, [Constant::AUTOMATIQUE, Constant::MANUEL]);
             $table->boolean(FieldName::ACTIF);

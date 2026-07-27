@@ -14,11 +14,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::SITE_FRAIS_SUPPLEMENTAIRES, function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger(FieldName::SITE_ID);
+            $table->uuid(FieldName::ID)->primary();
+            $table->foreignUuid(FieldName::SITE_ID)->references(FieldName::ID)->on(TableName::SITES_TOURISTIQUES)->cascadeOnDelete();
             $table->string(FieldName::LIBELLE);
             $table->decimal(FieldName::MONTANT);
-            $table->foreign(FieldName::SITE_ID)->references(FieldName::ID)->on(TableName::SITES_TOURISTIQUES)->onDelete('cascade');
         });
     }
 

@@ -15,13 +15,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::SITE_MEDIAS, function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger(FieldName::SITE_ID);
+            $table->uuid(FieldName::ID)->primary();
+            $table->foreignUuid(FieldName::SITE_ID)->references(FieldName::ID)->on(TableName::SITES_TOURISTIQUES)->cascadeOnDelete();
             $table->enum(FieldName::TYPE, [Constant::IMAGE, Constant::VIDEO]);
             $table->string(FieldName::URL);
             $table->boolean(FieldName::EST_COUVERTURE);
             $table->integer(FieldName::ORDRE);
-            $table->foreign(FieldName::SITE_ID)->references(FieldName::ID)->on(TableName::SITES_TOURISTIQUES)->onDelete('cascade');
         });
     }
 

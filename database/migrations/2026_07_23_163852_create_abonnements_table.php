@@ -15,15 +15,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::ABONNEMENTS, function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger(FieldName::TYPE_ABONNEMENT_ID);
-            $table->unsignedBigInteger(FieldName::ACTEUR_MOBILE_ID);
+            $table->uuid(FieldName::ID)->primary();
+            $table->foreignUuid(FieldName::TYPE_ABONNEMENT_ID)->references(FieldName::ID)->on(TableName::TYPES_ABONNEMENT)->cascadeonDelete();
+            $table->foreignUuid(FieldName::ACTEUR_MOBILE_ID)->references(FieldName::ID)->on(TableName::ACTEURS_MOBILE)->cascadeOnDelete();
             $table->date(FieldName::DATE_DEBUT);
             $table->date(FieldName::DATE_FIN);
             $table->decimal(FieldName::MONTANT);
             $table->enum(FieldName::STATUT, [Constant::ACTIF, Constant::EXPIRE]);
-            $table->foreign(FieldName::TYPE_ABONNEMENT_ID)->references(FieldName::ID)->on(TableName::TYPES_ABONNEMENT)->onDelete('cascade');
-            $table->foreign(FieldName::ACTEUR_MOBILE_ID)->references(FieldName::ID)->on(TableName::ACTEURS_MOBILE)->onDelete('cascade');
             $table->timestamps();
         });
     }

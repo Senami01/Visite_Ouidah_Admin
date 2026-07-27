@@ -15,8 +15,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::ACTEUR_MOYENS_PAIEMENT, function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger(FieldName::ACTEUR_REVERSEMENT_ID);
+            $table->uuid(FieldName::ID)->primary();
+            $table->foreignUuid(FieldName::ACTEUR_REVERSEMENT_ID)->references(FieldName::ID)->on(TableName::ACTEURS_REVERSEMENT)->cascadeOnDelete();
             $table->enum(FieldName::MODE, [Constant::MOBILE_MONEY, Constant::VIREMENT,Constant::CHEQUE,Constant::ESPECES]);
             $table->enum(FieldName::CONFIG_MODE, [Constant::AUTOMATIQUE, Constant::MANUEL]);
             $table->boolean(FieldName::ACTIF);
@@ -33,7 +33,6 @@ return new class extends Migration
             $table->string(FieldName::CODE_SWIFT);
             $table->string(FieldName::DEVISE);
             $table->string(FieldName::A_L_ORDRE_DE);
-            $table->foreign(FieldName::ACTEUR_REVERSEMENT_ID)->references(FieldName::ID)->on(TableName::ACTEURS_REVERSEMENT)->onDelete('cascade');
             $table->timestamps();
         });
     }

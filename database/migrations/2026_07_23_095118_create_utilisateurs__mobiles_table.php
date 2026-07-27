@@ -15,14 +15,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::UTILISATEURS_MOBILE, function (Blueprint $table) {
-            $table->id();
+            $table->uuid(FieldName::ID)->primary();
             $table->string(FieldName::NOM);
             $table->string(FieldName::PRENOM);
             $table->string(FieldName::EMAIL, 150)->unique();
             $table->string(FieldName::TELEPHONE, 20);
             $table->string(FieldName::PAYS, 100);
             $table->string(FieldName::ROLE);
-            $table->unsignedBigInteger(FieldName::ACTEUR_MOBILE_ID);
+            $table->foreignUuid(FieldName::ACTEUR_MOBILE_ID)->references(FieldName::ID)->on(TableName::ACTEURS_MOBILE)->cascadeOnDelete();
             $table->enum(FieldName::STATUT,[Constant::ACTIF, Constant::DESACTIVE]);
             $table->timestamp(FieldName::DERNIERE_CONNEXION);
             $table->timestamps();

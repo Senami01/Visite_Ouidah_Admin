@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::VISITEURS, function (Blueprint $table) {
-            $table->id();
+            $table->uuid(FieldName::ID)->primary();
             $table->string(FieldName::NOM);
             $table->string(FieldName::PRENOM);
             $table->string(FieldName::PAYS, 100);

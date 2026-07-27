@@ -15,14 +15,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::AVIS, function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger(FieldName::ACTEUR_MOBILE_ID);
-            $table->unsignedBigInteger(FieldName::VISITEUR_ID);
+            $table->uuid(FieldName::ID)->primary();
+            $table->foreignUuid(FieldName::ACTEUR_MOBILE_ID)->references(FieldName::ID)->on(TableName::ACTEURS_MOBILE)->cascadeOnDelete();
+            $table->foreignUuid(FieldName::VISITEUR_ID)->references(FieldName::ID)->on(TableName::VISITEURS)->cascadeOnDelete();
             $table->integer(FieldName::NOTE);
             $table->text(FieldName::CONTENU);
             $table->enum(FieldName::STATUT, [Constant::PUBLIE, Constant::CONTESTE]);
-            $table->foreign(FieldName::ACTEUR_MOBILE_ID)->references(FieldName::ID)->on(TableName::ACTEURS_MOBILE)->onDelete('cascade');
-            $table->foreign(FieldName::VISITEUR_ID)->references(FieldName::ID)->on(TableName::VISITEURS)->onDelete('cascade');
             $table->timestamps();
         });
     }

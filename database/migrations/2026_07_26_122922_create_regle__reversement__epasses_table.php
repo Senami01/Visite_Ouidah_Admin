@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::REGLE_REVERSEMENT_EPASS, function (Blueprint $table) {
-            $table->id();
+            $table->uuid(FieldName::ID)->primary();
             $table->boolean(FieldName::EPASS_ATTENTE_REVERSES);
             $table->boolean(FieldName::AUTORISER_REVERSEMENT_ATTENTE);
             $table->decimal(FieldName::PART_GERANT_SITE);

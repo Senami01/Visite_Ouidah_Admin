@@ -14,16 +14,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::REVERSEMENT_LIGNES, function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger(FieldName::REVERSEMENT_ID);
-            $table->unsignedBigInteger(FieldName::EPASS_ID);
-            $table->unsignedBigInteger(FieldName::ABONNEMENT_ID);
+            $table->uuid(FieldName::ID)->primary();
+            $table->foreignUuid(FieldName::REVERSEMENT_ID)->references(FieldName::ID)->on(TableName::REVERSEMENTS)->cascadeOnDelete();
+            $table->foreignUuid(FieldName::EPASS_ID)->references(FieldName::ID)->on(TableName::EPASSES)->cascadeOnDelete();
+            $table->foreignUuid(FieldName::ABONNEMENT_ID)->references(FieldName::ID)->on(TableName::ABONNEMENTS)->cascadeOnDelete();
             $table->string(FieldName::LIBELLE);
             $table->decimal(FieldName::MONTANT);
             $table->decimal(FieldName::A_REVERSER);
-            $table->foreign(FieldName::REVERSEMENT_ID)->references(FieldName::ID)->on(TableName::REVERSEMENTS)->onDelete('cascade');
-            $table->foreign(FieldName::EPASS_ID)->references(FieldName::ID)->on(TableName::EPASSES)->onDelete('cascade');
-            $table->foreign(FieldName::ABONNEMENT_ID)->references(FieldName::ID)->on(TableName::ABONNEMENTS)->onDelete('cascade');
             $table->timestamps();
         });
     }

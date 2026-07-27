@@ -15,15 +15,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::VISITES, function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger(FieldName::EPASS_ID);
-            $table->unsignedBigInteger(FieldName::SITE_ID);
-            $table->unsignedBigInteger(FieldName::VISITEUR_ID);
+            $table->uuid(FieldName::ID)->primary();
+            $table->foreignUuid(FieldName::EPASS_ID)->references(FieldName::ID)->on(TableName::EPASSES)->cascadeOnDelete();
+            $table->foreignUuid(FieldName::SITE_ID)->references(FieldName::ID)->on(TableName::SITES_TOURISTIQUES)->cascadeOnDelete();
+            $table->foreignUuid(FieldName::VISITEUR_ID)->references(FieldName::ID)->on(TableName::VISITEURS)->cascadeOnDelete();
             $table->date(FieldName::DATE_VISITE);
             $table->enum(FieldName::STATUT, [Constant::PROGAMMEE, Constant::EN_COURS, Constant::EFFECTUEE, Constant::EN_RETARD, Constant::ANNULEE, Constant::ABSENTE]);
-            $table->foreign(FieldName::EPASS_ID)->references(FieldName::ID)->on(TableName::EPASSES)->onDelete('cascade');
-            $table->foreign(FieldName::SITE_ID)->references(FieldName::ID)->on(TableName::SITES_TOURISTIQUES)->onDelete('cascade');
-            $table->foreign(FieldName::VISITEUR_ID)->references(FieldName::ID)->on(TableName::VISITEURS)->onDelete('cascade');
         });
     }
 

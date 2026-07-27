@@ -14,12 +14,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::SITE_HORAIRES, function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger(FieldName::SITE_ID);
+            $table->uuid(FieldName::ID)->primary();
+            $table->foreignUuid(FieldName::SITE_ID)->references(FieldName::ID)->on(TableName::SITES_TOURISTIQUES)->cascadeOnDelete();
             $table->string(FieldName::JOUR);
             $table->time(FieldName::OUVERTURE);
             $table->time(FieldName::FERMETURE);
-            $table->foreign(FieldName::SITE_ID)->references(FieldName::ID)->on(TableName::SITES_TOURISTIQUES)->onDelete('cascade');
         });
     }
 

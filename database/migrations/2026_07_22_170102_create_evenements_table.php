@@ -15,7 +15,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::EVENEMENTS, function (Blueprint $table) {
-            $table->id();
+            $table->uuid(FieldName::ID)->primary();
             $table->string(FieldName::TITRE);
             $table->text(FieldName::DESCRIPTION);
             $table->string(FieldName::LIEU);
@@ -23,8 +23,7 @@ return new class extends Migration
             $table->timestamp(FieldName::DATE_FIN);
             $table->string(FieldName::PAGE_WEB);
             $table->enum(FieldName::STATUT, [Constant::BROUILLON, Constant::PUBLIE, Constant::ARCHIVE]);
-            $table->unsignedBigInteger(FieldName::CREATED_BY);
-            $table->foreign(FieldName::CREATED_BY)->references(FieldName::ID)->on(TableName::ADMINISTRATEURS)->onDelete('cascade');
+            $table->foreignUuid(FieldName::CREATED_BY)->references(FieldName::ID)->on(TableName::ADMINISTRATEURS)->cascadeOnDelete();
             $table->timestamps();
         });
     }

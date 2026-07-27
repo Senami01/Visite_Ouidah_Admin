@@ -3,7 +3,6 @@
 use App\Lib\TableName;
 use App\Lib\FieldName;
 use App\Lib\Constant;
-use App\Lib\StatutSite;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +15,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::SITES_TOURISTIQUES, function (Blueprint $table) {
-            $table->id();
+            $table->uuid(FieldName::ID)->primary();
             $table->string(FieldName::NOM)->nullable(false);
             $table->string(FieldName::CATEGORIE);
             $table->decimal(FieldName::LATITUDE, 10, 8);
@@ -31,8 +30,7 @@ return new class extends Migration
             $table->enum(FieldName::STATUT, [Constant::BROUILLON, Constant::PUBLIE, Constant::DESACTIVE]);
             $table->timestamp(FieldName::DATE_BROUILLON);
             $table->timestamp(FieldName::DATE_PUBLICATION);
-            $table->unsignedBigInteger(FieldName::CREATED_BY);
-            $table->foreign(FieldName::CREATED_BY)->references(FieldName::ID)->on(TableName::ADMINISTRATEURS)->onDelete('cascade');
+            $table->foreignUuid(FieldName::CREATED_BY)->references(FieldName::ID)->on(TableName::ADMINISTRATEURS)->cascadeOnDelete();
             $table->timestamps();
         });
     }

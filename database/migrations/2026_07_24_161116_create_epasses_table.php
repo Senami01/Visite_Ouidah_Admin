@@ -15,17 +15,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::EPASSES, function (Blueprint $table) {
-            $table->id();
+            $table->uuid(FieldName::ID)->primary();
             $table->string(FieldName::REFERENCE)->unique();
             $table->enum(FieldName::TYPE_INIATEUR, [Constant::GUIDE, Constant::AGENCE, Constant::VISITEUR]);
-            $table->unsignedBigInteger(FieldName::ACTEUR_MOBILE_ID);
+            $table->foreignUuid(FieldName::ACTEUR_MOBILE_ID)->references(FieldName::ID)->on(TableName::ACTEURS_MOBILE)->cascadeOnDelete();
             $table->enum(FieldName::STATUT, [Constant::EN_ATTENTE, Constant::CONSOMME, Constant::EXPIRE]);
             $table->decimal(FieldName::MONTANT_HT, 10, 2);
             $table->decimal(FieldName::MONTANT_TAXES, 10, 2);
             $table->decimal(FieldName::MONTANT_TOTAL, 10, 2);
             $table->timestamp(FieldName::DATE_CREATION);
             $table->date(FieldName::DATE_REALISATION);
-            $table->foreign(FieldName::ACTEUR_MOBILE_ID)->references(FieldName::ID)->on(TableName::ACTEURS_MOBILE)->onDelete('cascade');
         });
     }
 
