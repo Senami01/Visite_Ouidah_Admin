@@ -25,6 +25,6 @@ class Administrateurs extends Model
 
     public function sitesTouristiques(): HasMany
     {
-        return $this->hasMany(Sites_Touristiques::class);
+        return $this->hasMany(Sites_Touristiques::class, FieldName::CREATED_BY);
     }
 }
