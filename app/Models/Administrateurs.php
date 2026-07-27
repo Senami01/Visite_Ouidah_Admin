@@ -42,4 +42,10 @@ class Administrateurs extends Model
     {
         return $this->hasMany(journal_Activite::class, FieldName::AUTEUR_ADMIN_ID);
     }
+
+    public function evenements(): HasMany
+    {
+        return $this->hasMany(Evenements::class, FieldName::CREATED_BY);
+    }
+
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Lib\TableName;
 use App\Lib\FieldName;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Evenements extends Model
 {
@@ -19,4 +20,9 @@ class Evenements extends Model
         FieldName::STATUT,
         FieldName::CREATED_BY
     ];
+
+    public function administrateur(): belongsTo
+    {
+        return $this->belongsTo(Administrateurs::class, FieldName::CREATED_BY);
+    }
 }
