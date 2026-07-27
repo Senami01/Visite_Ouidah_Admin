@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::EPASS_TAXES, function (Blueprint $table) {
-            $table->uuid(FieldName::ID);
+            $table->uuid(FieldName::ID)->primary();
             $table->foreignUuid(FieldName::EPASS_ID)->references(FieldName::ID)->on(TableName::EPASSES)->cascadeOnDelete();
             $table->foreignUuid(FieldName::TAXE_ID)->references(FieldName::ID)->on(TableName::TAXES)->cascadeOnDelete();
             $table->string(FieldName::LIBELLE);
