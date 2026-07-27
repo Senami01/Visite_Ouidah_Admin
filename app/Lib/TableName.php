@@ -20,6 +20,7 @@ class TableName
     public const EPASSES = 'epasses';
     public const EPASS_LIGNES = 'epass_lignes';
     public const EPASS_PERSONNES = 'epass_personnes';
+    public const EPASS_TAXES = 'epass_taxes';
     public const EVENEMENTS = 'evenements';
     public const EVENEMENT_MEDIAS = 'evenement_medias';
     public const REGLE_REVERSEMENT_EPASS = 'regle_reversement_epass';

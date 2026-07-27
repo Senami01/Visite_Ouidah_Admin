@@ -120,6 +120,7 @@ class FieldName
     public const SPECIALITES = 'specialites';
     public const STATUT = 'statut';
     public const TARIF_UNITAIRE = 'tarif_unitaire';
+    public const TAXE_ID = 'taxe_id';
     public const TELEPHONE = 'telephone';
     public const TITRE = 'titre';
     public const TRAITE_PAR = 'traite_par';
