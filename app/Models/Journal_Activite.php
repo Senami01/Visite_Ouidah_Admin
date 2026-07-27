@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Lib\TableName;
 use App\Lib\FieldName;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Journal_Activite extends Model
 {
@@ -17,4 +18,9 @@ class Journal_Activite extends Model
         FieldName::DETAILS,
         FieldName::AUTEUR_ADMIN_ID
     ];
+
+    public function administrateur(): belongsTo
+    {
+        return $this->belongsTo(Administrateurs::class, FieldName::AUTEUR_ADMIN_ID);
+    }
 }

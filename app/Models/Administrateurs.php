@@ -37,4 +37,9 @@ class Administrateurs extends Model
     {
         return $this->hasMany(Contestations::class, FieldName::TRAITE_PAR);
     }
+
+    public function journalactivite(): HasMany
+    {
+        return $this->hasMany(journal_Activite::class, FieldName::AUTEUR_ADMIN_ID);
+    }
 }
