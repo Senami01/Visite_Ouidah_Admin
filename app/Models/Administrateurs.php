@@ -4,13 +4,18 @@ namespace App\Models;
 
 use App\Lib\TableName;
 use App\Lib\FieldName;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Administrateurs extends Model
 {
+    use HasFactory;
+
     protected $table = TableName::ADMINISTRATEURS;
 
+    protected $primaryKey = FieldName::ID;
+    protected $keyType = 'string';
     protected $fillable = [
         FieldName::NOM,
         FieldName::PRENOM,
