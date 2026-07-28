@@ -16,6 +16,7 @@ class Administrateurs extends Model
 
     protected $primaryKey = FieldName::ID;
     protected $keyType = 'string';
+    public $incrementing = false;
     protected $fillable = [
         FieldName::NOM,
         FieldName::PRENOM,

@@ -3,16 +3,14 @@
 namespace Database\Factories;
 
 use App\Lib\FieldName;
-use App\Lib\Constant;
 use Illuminate\Support\Str;
-use App\Models\Administrateurs;
+use App\Models\Visiteurs;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 
 /**
- * @extends Factory<Administrateurs>
+ * @extends Factory<Visiteurs>
  */
-class AdministrateursFactory extends Factory
+class VisiteursFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -25,13 +23,9 @@ class AdministrateursFactory extends Factory
             FieldName::ID => (string) Str::uuid(),
             FieldName::NOM => $this->faker->lastName(),
             FieldName::PRENOM => $this->faker->firstName(),
+            FieldName::PAYS => $this->faker->country(),
             FieldName::EMAIL => $this->faker->unique()->safeEmail(),
             FieldName::TELEPHONE => $this->faker->phoneNumber(),
-            FieldName::ADRESSE_RESIDENCE => $this->faker->address(),
-            FieldName::MOT_DE_PASSE_HASH => Hash::make('password'),
-            FieldName::ROLE => $this->faker->randomElement(['Administrateur Système', 'Administrateur Mairie', 'Opérateur Délégué']),
-            FieldName::STATUT => $this->faker->randomElement([Constant::ACTIF, Constant::DESACTIVE]),
-            FieldName::DERNIERE_CONNEXION => $this->faker->dateTimeThisYear(),
         ];
     }
 }

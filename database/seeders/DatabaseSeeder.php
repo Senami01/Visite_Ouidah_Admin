@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Administrateurs;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -20,6 +19,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             AdministrateursSeeder::class,
+            VisiteursSeeder::class,
         ]);
     }
 }
