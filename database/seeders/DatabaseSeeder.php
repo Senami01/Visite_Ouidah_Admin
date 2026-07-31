@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             AdministrateursSeeder::class,
-            VisiteursSeeder::class,
+  
         ]);
     }
 }
