@@ -7,6 +7,9 @@ class Constant
     public const ABSENTE = 'absente';
     public const ACCEPTEE = 'accepetee';
     public const ACTIF = 'actif';
+    public const ADMINISTRATEUR_MAIRIE = 'administrateur mairie';
+    public const ADMINISTRATEUR_MINISTERE_TOURISME = 'administrateur ministere tourisme';
+    public const ADMINISTRATEUR_SYSTEME = 'administrateur systeme';
     public const AGENCE = 'agence';
     public const ANNULEE = 'annulee';
     public const ARCHIVE = 'archive';
@@ -31,12 +34,12 @@ class Constant
     public const HOTEL = 'hotel';
     public const IMAGE = 'image';
     public const INACTIF = 'inactif';
-    
     public const MANUEL = 'manuel';
     public const MASQUE = 'masque';
     public const MOBILE_MONEY = 'mobile_money';
     public const MOOV = 'moov';
     public const MTN ='mtn';
+    public const OPERATEUR_DELEGUE = 'operateur delegue';
     public const PASSEPORT = 'passeport'; 
     public const PERMIS = 'permis';
     public const PUBLIE = 'publie';
