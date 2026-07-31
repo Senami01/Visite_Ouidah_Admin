@@ -28,6 +28,7 @@ class TableName
     public const REGLE_REVERSEMENT_REPARTITIONS = 'regle_reversement_repartitions';
     public const REVERSEMENTS = 'reversements';
     public const REVERSEMENT_LIGNES = 'reversement_lignes';
+    public const ROLE = 'role';
     public const SITE_FRAIS_SUPPLEMENTAIRES = 'site_frais_supplementaires';
     public const SITE_HORAIRES = 'site_horaires';
     public const SITE_MEDIAS = 'site_medias';
