@@ -23,7 +23,7 @@ return new class extends Migration
             $table->text(FieldName::ADRESSE_RESIDENCE);
             $table->string(FieldName::MOT_DE_PASSE_HASH);
             $table->string(FieldName::ROLE);
-            $table->enum(FieldName::STATUT, [Constant::ACTIF, Constant::DESACTIVE]);
+            $table->boolean(FieldName::STATUT)->default(true);
             $table->timestamp(FieldName::DERNIERE_CONNEXION);
             $table->timestamps();
         });

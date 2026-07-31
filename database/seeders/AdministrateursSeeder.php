@@ -3,11 +3,9 @@
 namespace Database\Seeders;
 
 use App\Lib\FieldName;
-use App\Lib\Constant;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\Administrateurs;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class AdministrateursSeeder extends Seeder
@@ -17,28 +15,44 @@ class AdministrateursSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = \Faker\Factory::create();
-        $administrateurs = [];
+        $roles = ['Admin', 'Maire', 'Assistant_Maire'];
 
-        for ($i = 0; $i < 3; $i++) {
-            $administrateurs[] = [
-                FieldName::ID => (string) Str::uuid(), 
-                FieldName::NOM => $faker->lastName(),
-                FieldName::PRENOM => $faker->firstName(),
-                FieldName::EMAIL => $faker->unique()->safeEmail(),
-                FieldName::TELEPHONE => $faker->phoneNumber(),
-                FieldName::ADRESSE_RESIDENCE => $faker->address(),
-                FieldName::MOT_DE_PASSE_HASH => Hash::make('secret'), 
-                FieldName::ROLE => $faker->randomElement([
-                    Constant::ADMINISTRATEUR_SYSTEME, 
-                    Constant::ADMINISTRATEUR_MAIRIE, 
-                    Constant::OPERATEUR_DELEGUE, 
-                    Constant::ADMINISTRATEUR_MINISTERE_TOURISME
-                    ]),
-                FieldName::STATUT => $faker->randomElement([Constant::ACTIF, Constant::DESACTIVE]),
-                FieldName::DERNIERE_CONNEXION => $faker->dateTimeThisYear(),
-            ];
-        }
+        $administrateurs = [
+            [
+                FieldName::ID => (string) Str::uuid(),
+                FieldName::NOM => 'AGBOSSA',
+                FieldName::PRENOM => 'Marc',
+                FieldName::EMAIL => 'marcagbossa@test.com',
+                FieldName::TELEPHONE => '0190909090',
+                FieldName::ADRESSE_RESIDENCE => 'Cotonou',
+                FieldName::MOT_DE_PASSE_HASH => Hash::make('Admin###'),
+                FieldName::ROLE => $roles[0],
+                FieldName::DERNIERE_CONNEXION => now()->subDays(3),
+            ],
+            [
+                FieldName::ID => (string) Str::uuid(),
+                FieldName::NOM => 'SOHOU',
+                FieldName::PRENOM => 'Aline',
+                FieldName::EMAIL => 'alinesohou@test.com',
+                FieldName::TELEPHONE => '0191919191',
+                FieldName::ADRESSE_RESIDENCE => 'Ouidah',
+                FieldName::MOT_DE_PASSE_HASH => Hash::make('Maire###'),
+                FieldName::ROLE => $roles[1],
+                FieldName::STATUT => false,
+                FieldName::DERNIERE_CONNEXION => now()->subDays(8),
+            ],
+            [
+                FieldName::ID => (string) Str::uuid(),
+                FieldName::NOM => 'TCHEOU',
+                FieldName::PRENOM => 'Jean',
+                FieldName::EMAIL => 'jeantcheou@test.com',
+                FieldName::TELEPHONE => '0192929292',
+                FieldName::ADRESSE_RESIDENCE => 'Ouidah',
+                FieldName::MOT_DE_PASSE_HASH => Hash::make('Assist###'),
+                FieldName::ROLE => $roles[2], 
+                FieldName::DERNIERE_CONNEXION => now()->subDays(5),
+            ]
+        ];
         
         foreach ($administrateurs as $admin) {
             Administrateurs::create($admin);
