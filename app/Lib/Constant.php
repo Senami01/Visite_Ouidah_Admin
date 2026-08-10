@@ -50,7 +50,7 @@ class Constant
     public const REVERSE = 'reverse';
     public const SUSPENDU = 'suspendu';
     public const UNIQUE = 'unique';
-    public const UTILISATEUR_MOBILE = 'utilisateur_mobile';
+    public const ACTEUR_MOBILE = 'acteur_mobile';
     public const VIDEO = 'video';
     public const VIREMENT = 'virement';
     public const VISITEUR = 'visiteur';

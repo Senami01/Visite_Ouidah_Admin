@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create(TableName::USERS, function (Blueprint $table) {
             $table->uuid(FieldName::ID)->primary();
             $table->string(FieldName::NOM);
-            $table->string(FieldName::PRENOM);
+            $table->string(FieldName::PRENOM)->nullable();
             $table->string(FieldName::EMAIL, 150)->unique(); 
             $table->string(FieldName::TELEPHONE, 20);
             $table->string(FieldName::DENOMINATION)->nullable();
@@ -28,23 +28,20 @@ return new class extends Migration
             $table->text(FieldName::A_PROPOS)->nullable();
             $table->string(FieldName::LANGUES_PARLEES)->nullable();
             $table->string(FieldName::SPECIALITES)->nullable();
-            $table->date(FieldName::DATE_AGREMENT);
-            $table->enum(FieldName::TYPE,[Constant::ADMINISTRATEUR, Constant::UTILISATEUR_MOBILE]);
+            $table->date(FieldName::DATE_AGREMENT)->nullable();
+            $table->enum(FieldName::TYPE,[Constant::ADMINISTRATEUR, Constant::ACTEUR_MOBILE]);
             $table->string(FieldName::PASSWORD);
             $table->foreignUuid(FieldName::ROLE_ID)->references(FieldName::ID)->on(TableName::ROLE);
             $table->boolean(FieldName::STATUT)->default(true);
             $table->enum(FieldName::TYPE_ACTEUR, [Constant::GUIDE, Constant::AGENCE, Constant::HOTEL, Constant::RESTAURANT])->nullable();
             $table->timestamp(FieldName::DERNIERE_CONNEXION)->nullable();
             $table->timestamp(FieldName::EMAIL_VERIFIE_LE)->nullable();
-            $table->rememberToken();
+            $table->integer(FieldName::OTP)->nullable();
+            $table->string(FieldName::EXPIRE_LE)->nullable();
+            $table->string('refresh_token')->nullable();
+            $table->rememberToken()->nullable();
             $table->timestamps();
             
-        });
-
-        Schema::create(TableName::PASSWORD_RESET_TOKENS, function (Blueprint $table) {
-            $table->string(FieldName::EMAIL)->primary();
-            $table->string(FieldName::TOKEN);
-            $table->timestamp(FieldName::CREATED_AT)->nullable();
         });
 
     }

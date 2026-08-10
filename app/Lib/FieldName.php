@@ -66,6 +66,7 @@ class FieldName
     public const ENTITE_ID = 'entite_id';
     public const EPASS_ATTENTE_REVERSES = 'epass_attente_reverses';
     public const EPASS_ID = 'epass_id';
+    public const EXPIRE_LE = 'expire_le';
     public const EST_COUVERTURE ='est_couverture';
     public const EVENEMENT_ID = 'evenement_id';
     public const FERMETURE = 'fermeture';
@@ -100,6 +101,7 @@ class FieldName
     public const OBSERVATION = 'observation';
     public const ORDRE = 'ordre';
     public const ORDER_ID = 'order_id';
+    public const OTP = 'otp';
     public const OUVERTURE = 'ouverture';
     public const OUVERT_24_7 = 'ouvert_24_7';
     public const PAGE_WEB = 'page_web';

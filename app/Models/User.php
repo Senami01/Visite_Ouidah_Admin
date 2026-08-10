@@ -42,7 +42,8 @@ class User extends Authenticatable
         FieldName::TYPE_ACTEUR,
         FieldName::DERNIERE_CONNEXION,
         FieldName::EMAIL_VERIFIE_LE,
-        FieldName::REMEMBER_TOKEN,
+        FieldName::OTP,
+        FieldName::EXPIRE_LE,
     ];
 
 

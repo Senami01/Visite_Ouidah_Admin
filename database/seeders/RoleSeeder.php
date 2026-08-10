@@ -29,7 +29,17 @@ class RoleSeeder extends Seeder
                 FieldName::ID => (string) Str::uuid(),
                 FieldName::NOM => 'Assistant_Maire',
                 FieldName::DESCRIPTION => 'Assure les tâches administratives et logistiques pour le maire',
-            ]
+            ],
+            [
+                FieldName::ID => (string) Str::uuid(),
+                FieldName::NOM => 'Contrôleur d’accès',
+                FieldName::DESCRIPTION => 'Controle l’accès aux sites touristiques et assure la sécurité des visiteurs',
+            ],
+            [
+                FieldName::ID => (string) Str::uuid(),
+                FieldName::NOM => 'Gestionnaire',
+                FieldName::DESCRIPTION => 'Gère les activités des guides touristiques',
+            ],
         ];
 
 
