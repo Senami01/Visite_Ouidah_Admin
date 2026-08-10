@@ -14,9 +14,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::ROLE, function (Blueprint $table) {
-            $table->uuid(FieldName::ID);
+            $table->uuid(FieldName::ID)->primary();
             $table->string(FieldName::NOM);
             $table->text(FieldName::DESCRIPTION);
+            $table->timestamps();
         });
     }
 

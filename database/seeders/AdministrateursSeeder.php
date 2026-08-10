@@ -6,6 +6,7 @@ use App\Lib\FieldName;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\Administrateurs;
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 class AdministrateursSeeder extends Seeder
@@ -15,7 +16,6 @@ class AdministrateursSeeder extends Seeder
      */
     public function run(): void
     {
-        $roles = ['Admin', 'Maire', 'Assistant_Maire'];
 
         $administrateurs = [
             [
@@ -26,7 +26,7 @@ class AdministrateursSeeder extends Seeder
                 FieldName::TELEPHONE => '0190909090',
                 FieldName::ADRESSE_RESIDENCE => 'Cotonou',
                 FieldName::MOT_DE_PASSE_HASH => Hash::make('Admin###'),
-                FieldName::ROLE => $roles[0],
+                FieldName::ROLE_ID => Role::where(FieldName::NOM, 'Admin')->value(FieldName::ID),
                 FieldName::DERNIERE_CONNEXION => now()->subDays(3),
             ],
             [
@@ -37,7 +37,7 @@ class AdministrateursSeeder extends Seeder
                 FieldName::TELEPHONE => '0191919191',
                 FieldName::ADRESSE_RESIDENCE => 'Ouidah',
                 FieldName::MOT_DE_PASSE_HASH => Hash::make('Maire###'),
-                FieldName::ROLE => $roles[1],
+                FieldName::ROLE_ID => Role::where(FieldName::NOM, 'Maire')->value(FieldName::ID),
                 FieldName::STATUT => false,
                 FieldName::DERNIERE_CONNEXION => now()->subDays(8),
             ],
@@ -49,7 +49,7 @@ class AdministrateursSeeder extends Seeder
                 FieldName::TELEPHONE => '0192929292',
                 FieldName::ADRESSE_RESIDENCE => 'Ouidah',
                 FieldName::MOT_DE_PASSE_HASH => Hash::make('Assist###'),
-                FieldName::ROLE => $roles[2], 
+                FieldName::ROLE_ID => Role::where(FieldName::NOM, 'Assistant_Maire')->value(FieldName::ID),
                 FieldName::DERNIERE_CONNEXION => now()->subDays(5),
             ]
         ];

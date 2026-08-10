@@ -7,6 +7,7 @@ use App\Lib\FieldName;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Administrateurs extends Model
 {
@@ -30,6 +31,11 @@ class Administrateurs extends Model
     public function sitesTouristiques(): HasMany
     {
         return $this->hasMany(Sites_Touristiques::class, FieldName::CREATED_BY);
+    }
+
+    public function role(): belongsTo
+    {
+        return $this->belongsTo(Role::class, FieldName::ROLE_ID);
     }
 
     public function carrouselmedias(): HasMany

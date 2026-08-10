@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string(FieldName::TELEPHONE, 20);
             $table->text(FieldName::ADRESSE_RESIDENCE);
             $table->string(FieldName::MOT_DE_PASSE_HASH);
-            $table->string(FieldName::ROLE);
+            $table->foreignUuid(FieldName::ROLE_ID)->references(FieldName::ID)->on(TableName::ROLE);
             $table->boolean(FieldName::STATUT)->default(true);
             $table->timestamp(FieldName::DERNIERE_CONNEXION);
             $table->timestamps();

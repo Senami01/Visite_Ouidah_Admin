@@ -115,6 +115,7 @@ class FieldName
     public const RESEAU = 'reseau';
     public const REVERSEMENT_ID = 'reversement_id';
     public const ROLE = 'role';
+    public const ROLE_ID = 'role_id';
     public const SITE_ID = 'site_id';
     public const SITE_WEB = 'site_web';
     public const SPECIALITES = 'specialites';
