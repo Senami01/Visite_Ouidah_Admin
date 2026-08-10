@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestamp(FieldName::DATE_FIN);
             $table->string(FieldName::PAGE_WEB);
             $table->enum(FieldName::STATUT, [Constant::BROUILLON, Constant::PUBLIE, Constant::ARCHIVE]);
-            $table->foreignUuid(FieldName::CREATED_BY)->references(FieldName::ID)->on(TableName::ADMINISTRATEURS)->cascadeOnDelete();
+            $table->foreignUuid(FieldName::CREATED_BY)->references(FieldName::ID)->on(TableName::USERS)->cascadeOnDelete();
             $table->timestamps();
         });
     }

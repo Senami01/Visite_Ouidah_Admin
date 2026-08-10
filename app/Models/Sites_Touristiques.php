@@ -31,6 +31,6 @@ class Sites_Touristiques extends Model
 
     public function administrateur(): belongsTo
     {
-        return $this->belongsTo(Administrateurs::class, FieldName::CREATED_BY);
+        return $this->belongsTo(User::class, FieldName::CREATED_BY);
     }
 }

@@ -23,6 +23,6 @@ class Contestations extends Model
 
     public function administrateur(): belongsTo
     {
-        return $this->belongsTo(Administrateurs::class, FieldName::TRAITE_PAR);
+        return $this->belongsTo(User::class, FieldName::TRAITE_PAR);
     }
 }

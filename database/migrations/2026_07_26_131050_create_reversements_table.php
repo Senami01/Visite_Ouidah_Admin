@@ -32,8 +32,8 @@ return new class extends Migration
             $table->date(FieldName::DATE_VIREMENT_REEL);
             $table->string(FieldName::NUMERO_CHEQUE);
             $table->date(FieldName::DATE_RECEPTION_CHEQUE);
-            $table->foreignUuid(FieldName::VALIDE_PAR)->references(FieldName::ID)->on(TableName::ADMINISTRATEURS)->cascadeOnDelete();
-            $table->foreignUuid(FieldName::CREATED_BY)->references(FieldName::ID)->on(TableName::ADMINISTRATEURS)->cascadeOnDelete();
+            $table->foreignUuid(FieldName::VALIDE_PAR)->references(FieldName::ID)->on(TableName::USERS)->cascadeOnDelete();
+            $table->foreignUuid(FieldName::CREATED_BY)->references(FieldName::ID)->on(TableName::USERS)->cascadeOnDelete();
             $table->timestamps();
         });
     }

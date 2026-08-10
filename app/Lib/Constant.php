@@ -7,6 +7,7 @@ class Constant
     public const ABSENTE = 'absente';
     public const ACCEPTEE = 'accepetee';
     public const ACTIF = 'actif';
+    public const ADMINISTRATEUR = 'administrateur';
     public const ADMINISTRATEUR_MAIRIE = 'administrateur mairie';
     public const ADMINISTRATEUR_MINISTERE_TOURISME = 'administrateur ministere tourisme';
     public const ADMINISTRATEUR_SYSTEME = 'administrateur systeme';
@@ -49,6 +50,7 @@ class Constant
     public const REVERSE = 'reverse';
     public const SUSPENDU = 'suspendu';
     public const UNIQUE = 'unique';
+    public const UTILISATEUR_MOBILE = 'utilisateur_mobile';
     public const VIDEO = 'video';
     public const VIREMENT = 'virement';
     public const VISITEUR = 'visiteur';

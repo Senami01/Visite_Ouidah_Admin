@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create(TableName::CATALOGUE_ARTICLES, function (Blueprint $table) {
             $table->uuid(FieldName::ID)->primary();
-            $table->foreignUuid(FieldName::ACTEUR_MOBILE_ID)->references(FieldName::ID)->on(TableName::ACTEURS_MOBILE)->cascadeOnDelete();
+            $table->foreignUuid(FieldName::ACTEUR_MOBILE_ID)->references(FieldName::ID)->on(TableName::USERS)->cascadeOnDelete();
             $table->string(FieldName::LIBELLE);
             $table->decimal(FieldName::COUT);
             $table->text(FieldName::DESCRIPTION);

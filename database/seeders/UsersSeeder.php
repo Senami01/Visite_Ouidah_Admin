@@ -5,11 +5,11 @@ namespace Database\Seeders;
 use App\Lib\FieldName;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use App\Models\Administrateurs;
+use App\Models\User;
 use App\Models\Role;
 use Illuminate\Database\Seeder;
 
-class AdministrateursSeeder extends Seeder
+class UsersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -55,7 +55,7 @@ class AdministrateursSeeder extends Seeder
         ];
         
         foreach ($administrateurs as $admin) {
-            Administrateurs::create($admin);
+            User::create($admin);
         }
     }
 }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->uuid(FieldName::ID)->primary();
             $table->string(FieldName::REFERENCE)->unique();
             $table->enum(FieldName::TYPE_INIATEUR, [Constant::GUIDE, Constant::AGENCE, Constant::VISITEUR]);
-            $table->foreignUuid(FieldName::ACTEUR_MOBILE_ID)->references(FieldName::ID)->on(TableName::ACTEURS_MOBILE)->cascadeOnDelete();
+            $table->foreignUuid(FieldName::ACTEUR_MOBILE_ID)->references(FieldName::ID)->on(TableName::USERS)->cascadeOnDelete();
             $table->enum(FieldName::STATUT, [Constant::EN_ATTENTE, Constant::CONSOMME, Constant::EXPIRE]);
             $table->decimal(FieldName::MONTANT_HT, 10, 2);
             $table->decimal(FieldName::MONTANT_TAXES, 10, 2);

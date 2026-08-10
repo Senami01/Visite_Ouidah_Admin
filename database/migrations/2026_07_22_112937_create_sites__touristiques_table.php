@@ -30,7 +30,7 @@ return new class extends Migration
             $table->enum(FieldName::STATUT, [Constant::BROUILLON, Constant::PUBLIE, Constant::DESACTIVE]);
             $table->timestamp(FieldName::DATE_BROUILLON);
             $table->timestamp(FieldName::DATE_PUBLICATION);
-            $table->foreignUuid(FieldName::CREATED_BY)->references(FieldName::ID)->on(TableName::ADMINISTRATEURS)->cascadeOnDelete();
+            $table->foreignUuid(FieldName::CREATED_BY)->references(FieldName::ID)->on(TableName::USERS)->cascadeOnDelete();
             $table->timestamps();
         });
     }

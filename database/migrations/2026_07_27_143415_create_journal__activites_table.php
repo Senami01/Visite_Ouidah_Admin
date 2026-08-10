@@ -19,7 +19,7 @@ return new class extends Migration
             $table->uuid(FieldName::ENTITE_ID);
             $table->string(FieldName::ACTION);
             $table->text(FieldName::DETAILS);
-            $table->foreignUuid(FieldName::AUTEUR_ADMIN_ID)->references(FieldName::ID)->on(TableName::ADMINISTRATEURS)->cascadeOnDelete();
+            $table->foreignUuid(FieldName::AUTEUR_ADMIN_ID)->references(FieldName::ID)->on(TableName::USERS)->cascadeOnDelete();
             $table->timestamps();
         });
     }

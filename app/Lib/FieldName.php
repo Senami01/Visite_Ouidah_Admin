@@ -39,6 +39,7 @@ class FieldName
     public const COURTE_DESCRIPTION = 'courte_description';
     public const COULEUR = 'couleur';
     public const COUT = 'cout';
+    public const CREATED_AT = 'created_at';
     public const CREATED_BY = 'created_by';
     public const DATE_AGREMENT = 'date_agrement';
     public const DATE_BROUILLON = 'date_brouillon';
@@ -60,6 +61,7 @@ class FieldName
     public const DUREE_JOURS = 'duree_jours';
     public const ELIGIBLE_ABONNEMENT = 'eligible_abonnement';
     public const EMAIL = 'email';
+    public const EMAIL_VERIFIE_LE = 'email_verifie_le';
     public const ENTITE = 'entite';
     public const ENTITE_ID = 'entite_id';
     public const EPASS_ATTENTE_REVERSES = 'epass_attente_reverses';
@@ -102,6 +104,7 @@ class FieldName
     public const OUVERT_24_7 = 'ouvert_24_7';
     public const PAGE_WEB = 'page_web';
     public const PART_GERANT_SITE = 'part_gerant_site';
+    public const PASSWORD = 'password';
     public const PAYS = 'pays';
     public const PERIODE_DEBUT = 'periode_debut';
     public const PERIODE_FIN = 'periode_fin';
@@ -112,6 +115,7 @@ class FieldName
     public const QUANTITE = 'quantite';
     public const REFERENCE = 'reference';
     public const REGLE_ID = 'regle_id';
+    public const REMEMBER_TOKEN = 'remember_token';
     public const RESEAU = 'reseau';
     public const REVERSEMENT_ID = 'reversement_id';
     public const ROLE = 'role';
@@ -124,10 +128,12 @@ class FieldName
     public const TAXE_ID = 'taxe_id';
     public const TELEPHONE = 'telephone';
     public const TITRE = 'titre';
+    public const TOKEN = 'token';
     public const TRAITE_PAR = 'traite_par';
     public const TRANSACTION_ID = 'transaction_id';
     public const TYPE = 'type';
     public const TYPE_ABONNEMENT_ID = 'type_abonnement_id';
+    public const TYPE_ACTEUR = 'type_acteur';
     public const TYPE_INIATEUR = 'type_iniateur';
     public const TYPE_PIECE = 'type_piece';
     public const TYPE_TARIFICATION = 'type_tarification';

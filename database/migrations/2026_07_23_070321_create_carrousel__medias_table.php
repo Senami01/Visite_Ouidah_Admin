@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string(FieldName::URL);
             $table->integer(FieldName::ORDRE);
             $table->enum(FieldName::STATUT, [Constant::BROUILLON, Constant::PUBLIE, Constant::MASQUE]);
-            $table->foreignUuid(FieldName::CREATED_BY)->references(FieldName::ID)->on(TableName::ADMINISTRATEURS)->cascadeOnDelete();
+            $table->foreignUuid(FieldName::CREATED_BY)->references(FieldName::ID)->on(TableName::USERS)->cascadeOnDelete();
             $table->timestamps();
         });
     }

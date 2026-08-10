@@ -21,6 +21,6 @@ class Journal_Activite extends Model
 
     public function administrateur(): belongsTo
     {
-        return $this->belongsTo(Administrateurs::class, FieldName::AUTEUR_ADMIN_ID);
+        return $this->belongsTo(User::class, FieldName::AUTEUR_ADMIN_ID);
     }
 }

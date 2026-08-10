@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create(TableName::ABONNEMENTS, function (Blueprint $table) {
             $table->uuid(FieldName::ID)->primary();
             $table->foreignUuid(FieldName::TYPE_ABONNEMENT_ID)->references(FieldName::ID)->on(TableName::TYPES_ABONNEMENT)->cascadeonDelete();
-            $table->foreignUuid(FieldName::ACTEUR_MOBILE_ID)->references(FieldName::ID)->on(TableName::ACTEURS_MOBILE)->cascadeOnDelete();
+            $table->foreignUuid(FieldName::ACTEUR_MOBILE_ID)->references(FieldName::ID)->on(TableName::USERS)->cascadeOnDelete();
             $table->date(FieldName::DATE_DEBUT);
             $table->date(FieldName::DATE_FIN);
             $table->decimal(FieldName::MONTANT);

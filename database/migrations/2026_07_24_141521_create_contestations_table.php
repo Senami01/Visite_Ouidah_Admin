@@ -22,7 +22,7 @@ return new class extends Migration
             $table->enum(FieldName::STATUT, [Constant::EN_ATTENTE, Constant::ACCEPTEE, Constant::REJETEE]);
             $table->text(FieldName::OBSERVATION);
             $table->string(FieldName::FICHER_JOINT);
-            $table->foreignUuid(FieldName::TRAITE_PAR)->references(FieldName::ID)->on(TableName::ADMINISTRATEURS)->cascadeOnDelete();
+            $table->foreignUuid(FieldName::TRAITE_PAR)->references(FieldName::ID)->on(TableName::USERS)->cascadeOnDelete();
             $table->timestamp(FieldName::DATE_TRAITEMENT);
             $table->timestamps();
         });

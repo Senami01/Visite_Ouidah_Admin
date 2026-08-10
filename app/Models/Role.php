@@ -22,6 +22,6 @@ class Role extends Model
 
     public function Administrateurs(): HasMany
     {
-        return $this->hasMany(Administrateurs::class, FieldName::ROLE_ID);
+        return $this->hasMany(User::class, FieldName::ROLE_ID);
     }
 }

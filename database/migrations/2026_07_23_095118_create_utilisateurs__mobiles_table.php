@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string(FieldName::TELEPHONE, 20);
             $table->string(FieldName::PAYS, 100);
             $table->string(FieldName::ROLE);
-            $table->foreignUuid(FieldName::ACTEUR_MOBILE_ID)->references(FieldName::ID)->on(TableName::ACTEURS_MOBILE)->cascadeOnDelete();
+            $table->foreignUuid(FieldName::ACTEUR_MOBILE_ID)->references(FieldName::ID)->on(TableName::USERS)->cascadeOnDelete();
             $table->enum(FieldName::STATUT,[Constant::ACTIF, Constant::DESACTIVE]);
             $table->timestamp(FieldName::DERNIERE_CONNEXION);
             $table->timestamps();
