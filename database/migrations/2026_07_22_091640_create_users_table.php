@@ -36,7 +36,7 @@ return new class extends Migration
             $table->enum(FieldName::TYPE_ACTEUR, [Constant::GUIDE, Constant::AGENCE, Constant::HOTEL, Constant::RESTAURANT])->nullable();
             $table->timestamp(FieldName::DERNIERE_CONNEXION)->nullable();
             $table->timestamp(FieldName::EMAIL_VERIFIE_LE)->nullable();
-            $table->integer(FieldName::OTP)->nullable();
+            $table->string(FieldName::OTP, 60)->nullable();
             $table->string(FieldName::EXPIRE_LE)->nullable();
             $table->string('refresh_token')->nullable();
             $table->rememberToken()->nullable();
