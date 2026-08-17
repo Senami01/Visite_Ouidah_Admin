@@ -38,7 +38,7 @@ class User extends Authenticatable
         FieldName::DATE_AGREMENT,
         FieldName::TYPE,
         FieldName::PASSWORD,
-        FieldName::ROLE,
+        FieldName::ROLE_ID,
         FieldName::STATUT,
         FieldName::TYPE_ACTEUR,
         FieldName::DERNIERE_CONNEXION,
