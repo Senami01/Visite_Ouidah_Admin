@@ -52,7 +52,7 @@ class RoleController extends BaseController
         }
 
         $champs = $request->validate([
-            FieldName::NOM => 'required|string|max:255',
+            FieldName::NOM => 'sometimes|string|max:255',
             FieldName::DESCRIPTION => 'nullable|string',
         ]);
 
