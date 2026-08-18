@@ -2,36 +2,26 @@
 
 namespace App\Http\Controllers\Administration;
 
+use App\Http\Resources\Administration\RoleResource;
+use App\Http\Requests\Administration\StoreRoleRequest;
+use App\Http\Requests\Administration\UpdateRoleRequest;
 use App\Lib\FieldName;
 use App\Models\Role;
+use App\Models\User;
 use App\Http\Controllers\BaseController\BaseController;
-use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 
 class RoleController extends BaseController
 {
     public function index()
     {
         $roles = Role::all();
-        return $this->sendResponse($roles, "Liste des rôles récupérée avec succès.");
+        return $this->sendResponse(RoleResource::collection($roles), "Liste des rôles récupérée avec succès.");
     }
 
-    public function store(Request $request)
+    public function store(StoreRoleRequest $request)
     {
-        try {
-            $champs = $request->validate([
-                FieldName::NOM => 'required|string|max:255',
-                FieldName::DESCRIPTION => 'nullable|string',
-            ],
-            [
-                FieldName::NOM . '.required' => 'Le nom du rôle est requis.',
-            ]);
-        
-            $role = Role::create($champs);
-            return $this->sendResponse($role, "Rôle créé avec succès.", 201);
-        } catch (ValidationException $e) {
-            return $this->sendError("Erreur de validation.", $e->errors(), 422);
-        }
+        $role = Role::create($request->validated());
+        return $this->sendResponse(new RoleResource($role), "Rôle créé avec succès.", 201);
 
     }
 
@@ -41,23 +31,18 @@ class RoleController extends BaseController
         if (!$role) {
             return $this->sendError("Rôle non trouvé.", [], 404);
         }
-        return $this->sendResponse($role, "Rôle récupéré avec succès.");
+        return $this->sendResponse(new RoleResource($role), "Rôle récupéré avec succès.");
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateRoleRequest $request, $id)
     {
         $role = Role::find($id);
         if (!$role) {
             return $this->sendError("Rôle non trouvé.", [], 404);
         }
 
-        $champs = $request->validate([
-            FieldName::NOM => 'sometimes|string|max:255',
-            FieldName::DESCRIPTION => 'nullable|string',
-        ]);
-
-        $role->update($champs);
-        return $this->sendResponse($role, "Rôle mis à jour avec succès.");
+        $role->update($request->validated());
+        return $this->sendResponse(new RoleResource($role), "Rôle mis à jour avec succès.");
     }
 
     public function destroy($id)
@@ -67,7 +52,13 @@ class RoleController extends BaseController
             return $this->sendError("Rôle non trouvé.", [], 404);
         }
 
+        $liaisonExiste = User::where(FieldName::ROLE_ID, $role->id)->exists();
+        if ($liaisonExiste) {
+            return $this->sendError(
+                'Impossible de supprimer ce rôle car des utilisateurs y sont encore rattachés.', [], 400);
+        }
+
         $role->delete();
-        return $this->sendResponse([], "Rôle supprimé avec succès.");
+        return $this->sendResponse([], 'Rôle supprimé avec succès.');
     }
 }
