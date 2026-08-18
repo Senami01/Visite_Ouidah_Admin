@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Lib\FieldName;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Builder;
 
 class Helper
 {
@@ -35,5 +36,25 @@ class Helper
             FieldName::EMAIL_VERIFIE_LE => now(),
         ]);
         return $motDePasseClair;
+    }
+
+    public static function filtrer(Builder $query, array $champsFiltrables = []): Builder
+    {
+        $request = request();
+
+        foreach ($champsFiltrables as $champ) {
+            if ($request->filled($champ)) {
+                $valeur = $request->input($champ);
+
+                if (str_contains($valeur, '*')) {
+                    $valeurNettoyee = str_replace('*', '%', $valeur);
+                    $query->where($champ, 'like', $valeurNettoyee);
+                } else {
+                    $query->where($champ, $valeur);
+                }
+            }
+        }
+
+        return $query;
     }
 }
