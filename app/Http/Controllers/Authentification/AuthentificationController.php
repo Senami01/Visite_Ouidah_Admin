@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Authentification;
 
 use App\Lib\FieldName;
 use App\Models\User;
+use App\Lib\Helper;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\BaseController\BaseController;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class AuthentificationController extends BaseController
             FieldName::DERNIERE_CONNEXION => now()
         ]);
 
-        $jeton = generer_jeton_connexion($utilisateur);
+        $jeton = Helper::generer_jeton_connexion($utilisateur);
         $donnees = [
             'utilisateur' => $utilisateur,
             'token' => $jeton
@@ -49,7 +50,7 @@ class AuthentificationController extends BaseController
             return $this->sendResponse([],'Si vous avez un compte avec cet e-mail, un code de vérification à 6 chiffres vous a été envoyé.');
         }
 
-        $otp = generer_otp($utilisateur);
+        $otp = Helper::generer_otp($utilisateur);
         EnvoiMailOtpJob::dispatch($utilisateur, $otp);
         return $this->sendResponse([],'Si vous avez un compte avec cet e-mail, un code de vérification à 6 chiffres vous a été envoyé.');
     }
