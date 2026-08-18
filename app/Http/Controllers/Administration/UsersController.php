@@ -17,12 +17,12 @@ class UsersController extends BaseController
     private const TYPE_ADMIN = Constant::ADMINISTRATEUR;
     public function index()
     {
-        $admin = User::where(FieldName::TYPE, self::TYPE_ADMIN)->with('role')->get();
+        $admin = User::where(FieldName::TYPE, self::TYPE_ADMIN)->with('role')->paginate(env('PAGE'));
          if (!$admin) {
             return $this->sendError("Administrateurs non trouvés.", [], 404);
         }
-        
-        return $this->sendResponse(AdminResource::collection($admin), 'Liste des administrateurs récupérée avec succès.');
+        $paginer = AdminResource::collection($admin)->toResponse(request())->getData(true);
+        return $this->sendResponse($paginer, 'Liste des administrateurs récupérée avec succès.');
     }
 
     public function store(StoreAdminRequest $request)
