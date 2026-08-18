@@ -23,6 +23,7 @@ class AdminResource extends JsonResource
             FieldName::EMAIL => $this->{FieldName::EMAIL},
             FieldName::ROLE_ID => $this->{FieldName::ROLE_ID},
             FieldName::TYPE => $this->{FieldName::TYPE},
+            FieldName::TYPE_ACTEUR => $this->{FieldName::TYPE_ACTEUR},
             'role' => $this->relationLoaded('role') ? $this->role : null,
         ];
     }
