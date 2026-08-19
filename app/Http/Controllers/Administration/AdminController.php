@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Administration;
 
 use App\Lib\FieldName;
 use App\Lib\Constant;
+use App\Lib\Helper;
 use App\Models\User;
 use Illuminate\Support\Str;
 use App\Http\Resources\Administration\AdminResource;
@@ -12,17 +13,30 @@ use App\Http\Requests\Administration\UpdateAdminRequest;
 use App\Http\Controllers\BaseController\BaseController;
 use Illuminate\Support\Facades\Hash;
 
-class UsersController extends BaseController
+class AdminController extends BaseController
 {
     private const TYPE_ADMIN = Constant::ADMINISTRATEUR;
+    protected $recherche = [
+        'search_in' => [
+            FieldName::NOM,
+            FieldName::PRENOM,
+            FieldName::EMAIL,
+            FieldName::TELEPHONE,
+        ],
+        'champs' => [
+            FieldName::STATUT,
+            FieldName::TYPE,
+        ]
+    ];
     public function index()
     {
-        $admin = User::where(FieldName::TYPE, self::TYPE_ADMIN)->with('role')->paginate(env('PAGE'));
-         if (!$admin) {
-            return $this->sendError("Administrateurs non trouvés.", [], 404);
-        }
-        $paginer = AdminResource::collection($admin)->toResponse(request())->getData(true);
-        return $this->sendResponse($paginer, 'Liste des administrateurs récupérée avec succès.');
+        $requete = User::with('role')->where(FieldName::TYPE, 'administrateur');
+        
+        $requete = Helper::filtrer($requete, $this->recherche);
+        $paginer = $requete->paginate(env('PAGE'));
+        $reponse = AdminResource::collection($paginer)->toResponse(request())->getData(true);
+
+        return $this->sendResponse($reponse, 'Liste des administrateurs récupérée avec succès.');
     }
 
     public function store(StoreAdminRequest $request)
