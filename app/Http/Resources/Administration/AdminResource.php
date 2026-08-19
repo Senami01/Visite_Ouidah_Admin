@@ -16,15 +16,13 @@ class AdminResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            FieldName::ID => $this->{FieldName::ID},
             FieldName::NOM => $this->{FieldName::NOM},
             FieldName::PRENOM => $this->{FieldName::PRENOM},
-            FieldName::TELEPHONE => $this->{FieldName::TELEPHONE},
             FieldName::EMAIL => $this->{FieldName::EMAIL},
-            FieldName::ROLE_ID => $this->{FieldName::ROLE_ID},
-            FieldName::TYPE => $this->{FieldName::TYPE},
-            FieldName::TYPE_ACTEUR => $this->{FieldName::TYPE_ACTEUR},
-            'role' => $this->relationLoaded('role') ? $this->role : null,
+            'role' => $this->relationLoaded('role') ? $this->role?->{FieldName::NOM} : null,
+            FieldName::TELEPHONE => $this->{FieldName::TELEPHONE},
+            FieldName::STATUT => $this->{FieldName::STATUT},
+            FieldName::DERNIERE_CONNEXION => $this->{FieldName::DERNIERE_CONNEXION}, 
         ];
     }
 }
