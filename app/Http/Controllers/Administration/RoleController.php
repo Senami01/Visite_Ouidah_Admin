@@ -6,6 +6,7 @@ use App\Http\Resources\Administration\RoleResource;
 use App\Http\Requests\Administration\StoreRoleRequest;
 use App\Http\Requests\Administration\UpdateRoleRequest;
 use App\Lib\FieldName;
+use App\Lib\Helper;
 use App\Models\Role;
 use App\Models\User;
 use App\Http\Controllers\BaseController\BaseController;
@@ -14,7 +15,8 @@ class RoleController extends BaseController
 {
     public function index()
     {
-        $roles = Role::all();
+        $roles = Role::query();
+        $roles = Helper::filtrer($roles, [FieldName::NOM]);
         return $this->sendResponse(RoleResource::collection($roles), "Liste des rôles récupérée avec succès.");
     }
 
