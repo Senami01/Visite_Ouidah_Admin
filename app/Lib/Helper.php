@@ -38,23 +38,38 @@ class Helper
         return $motDePasseClair;
     }
 
-    public static function filtrer(Builder $query, array $champsFiltrables = []): Builder
+
+    public static function filtrer(Builder $query, array $configuration = []): Builder
     {
         $request = request();
 
-        foreach ($champsFiltrables as $champ) {
-            if ($request->filled($champ)) {
-                $valeur = $request->input($champ);
+        if ($request->filled('search') && isset($configuration['search_in'])) {
+            $valeurSearch = $request->input('search');
+            
+            $query->where(function ($q) use ($configuration, $valeurSearch) {
+                foreach ($configuration['search_in'] as $index => $champ) {
+                    $methode = $index === 0 ? 'where' : 'orWhere';
+                    $q->$methode($champ, 'like', "%{$valeurSearch}%");
+                }
+            });
+        }
 
-                if (str_contains($valeur, '*')) {
-                    $valeurNettoyee = str_replace('*', '%', $valeur);
-                    $query->where($champ, 'like', $valeurNettoyee);
-                } else {
-                    $query->where($champ, $valeur);
+        if (isset($configuration['champs'])) {
+            foreach ($configuration['champs'] as $champ) {
+                if ($request->filled($champ)) {
+                    $valeur = $request->input($champ);
+                    if ($valeur === 'all') {
+                        continue;
+                    }
+                    if (str_contains($valeur, '*')) {
+                        $valeurNettoyee = str_replace('*', '%', $valeur);
+                        $query->where($champ, 'like', $valeurNettoyee);
+                    } else {
+                        $query->where($champ, $valeur);
+                    }
                 }
             }
         }
-
         return $query;
     }
 }
