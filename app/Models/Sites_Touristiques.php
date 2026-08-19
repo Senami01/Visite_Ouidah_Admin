@@ -6,9 +6,15 @@ use App\Lib\FieldName;
 use App\Lib\TableName;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\belongsTo;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Sites_Touristiques extends Model
 {
+     use HasUuids; // 💡 Activation de la génération automatique de l'id UUID
+
+    protected $keyType = 'string';
+    public $incrementing = false;
+    
     protected $table = TableName::SITES_TOURISTIQUES;
 
     protected $fillable = [
@@ -26,11 +32,18 @@ class Sites_Touristiques extends Model
         FieldName::STATUT,
         FieldName::DATE_BROUILLON,
         FieldName::DATE_PUBLICATION,
-        FieldName::CREATED_BY
+        FieldName::CREATED_BY,
+        FieldName::ACTEUR_MOBILE_ID,
+        FieldName::INDICATIONS
     ];
 
     public function administrateur(): belongsTo
     {
         return $this->belongsTo(User::class, FieldName::CREATED_BY);
+    }
+
+    public function acteurMobile(): belongsTo
+    {
+        return $this->belongsTo(Utilisateurs_Mobile::class, FieldName::ACTEUR_MOBILE_ID);
     }
 }
