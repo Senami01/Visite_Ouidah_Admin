@@ -15,24 +15,30 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(TableName::SITES_TOURISTIQUES, function (Blueprint $table) {
-            $table->uuid(FieldName::ID)->primary();
-            $table->string(FieldName::NOM)->nullable(false);
-            $table->string(FieldName::CATEGORIE);
-            $table->decimal(FieldName::LATITUDE, 10, 8);
-            $table->decimal(FieldName::LONGITUDE, 11, 8);
-            $table->text(FieldName::ACCES);
-            $table->text(FieldName::COURTE_DESCRIPTION);
-            $table->string(FieldName::A_PROPOS_TITRE);
-            $table->text(FieldName::A_PROPOS_DESCRIPTION);
-            $table->text(FieldName::CONSEILS_PRATIQUES);
-            $table->enum(FieldName::TYPE_TARIFICATION, [Constant::UNIQUE, Constant::DOUBLE]);
-            $table->boolean(FieldName::OUVERT_24_7)->default(false);
-            $table->enum(FieldName::STATUT, [Constant::BROUILLON, Constant::PUBLIE, Constant::DESACTIVE]);
-            $table->timestamp(FieldName::DATE_BROUILLON);
-            $table->timestamp(FieldName::DATE_PUBLICATION);
-            $table->foreignUuid(FieldName::CREATED_BY)->references(FieldName::ID)->on(TableName::USERS)->cascadeOnDelete();
-            $table->timestamps();
+            
+        $table->uuid(FieldName::ID)->primary();
+        $table->string(FieldName::NOM)->nullable(false); 
+        $table->string(FieldName::CATEGORIE)->nullable(); 
+        $table->decimal(FieldName::LATITUDE, 10, 8)->nullable(); 
+        $table->decimal(FieldName::LONGITUDE, 11, 8)->nullable(); 
+        // 💡 Ajout de ->nullable() sur les champs secondaires pour éviter les erreurs PostgreSQL
+        $table->text(FieldName::ACCES)->nullable();
+        $table->text(FieldName::COURTE_DESCRIPTION)->nullable();
+        $table->string(FieldName::A_PROPOS_TITRE)->nullable();
+        $table->text(FieldName::A_PROPOS_DESCRIPTION)->nullable();
+        $table->text(FieldName::CONSEILS_PRATIQUES)->nullable();
+        $table->enum(FieldName::TYPE_TARIFICATION, [Constant::UNIQUE, Constant::DOUBLE])->nullable();
+        $table->boolean(FieldName::OUVERT_24_7)->default(false);
+        $table->enum(FieldName::STATUT, [Constant::BROUILLON, Constant::PUBLIE, Constant::DESACTIVE])->default(Constant::BROUILLON);
+        $table->timestamp(FieldName::DATE_BROUILLON)->nullable();
+        $table->timestamp(FieldName::DATE_PUBLICATION)->nullable();
+        // Clés étrangères (ajoutez ->nullable() si un site n'est pas forcément lié à un acteur mobile au départ)
+        $table->foreignUuid(FieldName::CREATED_BY)->references(FieldName::ID)->on(TableName::USERS)->cascadeOnDelete();
+        $table->foreignUuid(FieldName::ACTEUR_MOBILE_ID)->nullable()->references(FieldName::ID)->on(TableName::UTILISATEURS_MOBILE)->cascadeOnDelete();
+        
+        $table->timestamps();
         });
+
     }
 
     /**

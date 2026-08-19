@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Lib\TableName;
 use App\Lib\FieldName;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 
 class Utilisateurs_Mobile extends Model
 {
@@ -21,4 +23,9 @@ class Utilisateurs_Mobile extends Model
         FieldName::STATUT,
         FieldName::DERNIERE_CONNEXION
     ];
+
+     public function Sites_Touristiques(): HasMany
+    {
+        return $this->hasMany(Sites_Touristiques::class, FieldName::ACTEUR_MOBILE_ID);
+    }
 }

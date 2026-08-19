@@ -10,5 +10,5 @@ class Endpoint
     public const REINITIALISER_MOT_DE_PASSE = 'reinitialiser-mot-de-passe';
     public const ADMINISTRATEURS = 'administrateurs';
     public const VERIFIER_OTP = 'verifier-otp';
-    public const SITES_TOURISTIQUES = 'sites-touristiques';
+    public const SITES_TOURISTIQUES = 'sites_touristiques';
 }

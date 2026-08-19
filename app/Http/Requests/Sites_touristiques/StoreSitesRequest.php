@@ -26,10 +26,26 @@ class StoreSitesRequest extends FormRequest
         return [
             FieldName::NOM => 'required|string',
             FieldName::CATEGORIE => 'nullable|string',
-            FieldName::LATITUDE => 'nullable|decimal',
-            FieldName::LONGITUDE => 'nullable|decimal',
-            FieldName::SITE_ID => 'nullable|string',
+            FieldName::LATITUDE => 'nullable|numeric',
+            FieldName::LONGITUDE => 'nullable|numeric',
+            FieldName::ACTEUR_MOBILE_ID => 'nullable|uuid',
+            FieldName::COURTE_DESCRIPTION => 'nullable|string',
+            //FieldName::INDICATIONS => 'nullable|string', 
+            FieldName::CREATED_BY => 'required|uuid',
+        ];
+    }
 
+    public function messages(): array
+    {
+        return [
+            FieldName::NOM . '.required' => 'Le nom est requis.',
+            FieldName::CATEGORIE . '.required' => 'La catégorie est requise.',
+           // FieldName::INDICATIONS . '.required' => 'Les indications sont requises.',
+            FieldName::LATITUDE . '.numeric' => 'La latitude doit être un nombre valide.',
+            FieldName::LONGITUDE . '.numeric' => 'La longitude doit être un nombre valide.',
+            FieldName::ACTEUR_MOBILE_ID . '.uuid' => "L'ID de l'acteur mobile doit être un UUID valide.",
+             FieldName::CREATED_BY . '.required' => 'L\'ID de l\'utilisateur créateur est requis.',
+             FieldName::CREATED_BY . '.uuid' => "L'ID de l'utilisateur créateur doit être un UUID valide.",
         ];
     }
 }
