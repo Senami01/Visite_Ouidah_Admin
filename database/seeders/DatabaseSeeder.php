@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             VisiteursSeeder::class,
+            Utilisateurs_mobileSeeder::class,
+            SitesTouristiquesSeeder::class,
         ]);
     }
 }
