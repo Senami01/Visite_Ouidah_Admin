@@ -30,7 +30,7 @@ class StoreSitesRequest extends FormRequest
             FieldName::LONGITUDE => 'nullable|numeric',
             FieldName::ACTEUR_MOBILE_ID => 'nullable|uuid',
             FieldName::COURTE_DESCRIPTION => 'nullable|string',
-            //FieldName::INDICATIONS => 'nullable|string', 
+            FieldName::INDICATIONS => 'nullable|string', 
             FieldName::CREATED_BY => 'required|uuid',
         ];
     }
@@ -40,7 +40,7 @@ class StoreSitesRequest extends FormRequest
         return [
             FieldName::NOM . '.required' => 'Le nom est requis.',
             FieldName::CATEGORIE . '.required' => 'La catégorie est requise.',
-           // FieldName::INDICATIONS . '.required' => 'Les indications sont requises.',
+           FieldName::INDICATIONS . '.required' => 'Les indications sont requises.',
             FieldName::LATITUDE . '.numeric' => 'La latitude doit être un nombre valide.',
             FieldName::LONGITUDE . '.numeric' => 'La longitude doit être un nombre valide.',
             FieldName::ACTEUR_MOBILE_ID . '.uuid' => "L'ID de l'acteur mobile doit être un UUID valide.",

@@ -27,6 +27,7 @@ return new class extends Migration
         $table->string(FieldName::A_PROPOS_TITRE)->nullable();
         $table->text(FieldName::A_PROPOS_DESCRIPTION)->nullable();
         $table->text(FieldName::CONSEILS_PRATIQUES)->nullable();
+        $table->text(FieldName::INDICATIONS)->nullable();
         $table->enum(FieldName::TYPE_TARIFICATION, [Constant::UNIQUE, Constant::DOUBLE])->nullable();
         $table->boolean(FieldName::OUVERT_24_7)->default(false);
         $table->enum(FieldName::STATUT, [Constant::BROUILLON, Constant::PUBLIE, Constant::DESACTIVE])->default(Constant::BROUILLON);
