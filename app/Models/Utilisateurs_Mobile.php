@@ -5,13 +5,13 @@ namespace App\Models;
 use App\Lib\TableName;
 use App\Lib\FieldName;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
 class Utilisateurs_Mobile extends Model
 {
     protected $table = TableName::UTILISATEURS_MOBILE;
-
+    protected $primaryKey = FieldName::ID;
     protected $fillable = [
         FieldName::NOM,
         FieldName::PRENOM,
@@ -24,8 +24,8 @@ class Utilisateurs_Mobile extends Model
         FieldName::DERNIERE_CONNEXION
     ];
 
-     public function Sites_Touristiques(): HasMany
+     public function user(): BelongsTo
     {
-        return $this->hasMany(Sites_Touristiques::class, FieldName::ACTEUR_MOBILE_ID);
+        return $this->belongsTo(User::class, FieldName::ACTEUR_MOBILE_ID);
     }
 }

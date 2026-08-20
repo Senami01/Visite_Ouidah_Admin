@@ -87,4 +87,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Evenements::class, FieldName::CREATED_BY);
     }
+
+    public function utilisateursMobile(): HasMany
+    {
+        return $this->hasMany(Utilisateurs_Mobile::class, FieldName::ACTEUR_MOBILE_ID);
+    }
 }

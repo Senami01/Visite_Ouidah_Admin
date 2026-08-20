@@ -34,19 +34,23 @@ class Sites_TouristiquesController extends BaseController
 
      public function store(StoreSitesRequest $request)
     {   
-       $validation = $request->validated();
-    $site = Sites_Touristiques::create($validation);
-    
-    return $this->sendResponse(
-        new SitesTouristiquesResource($site),
-        "Site touristique créé avec succès.", 
-        201
-    );
+        $validation = $request->validated();
+        $site = Sites_Touristiques::create($validation);
+        
+        return $this->sendResponse(
+            new SitesTouristiquesResource($site),"Site touristique créé avec succès.", 201
+        );
     }
 
     public function show($id)
     {
-         
+        $site = Sites_Touristiques::find($id);
+        if (!$site) {
+            return $this->sendError("Site touristique non trouvé.", [], 404);
+        }
+        return $this->sendResponse(
+            new SitesTouristiquesResource($site), "Site touristique récupéré avec succès."
+        );
 
     }
 
