@@ -49,7 +49,7 @@ class Helper
             $query->where(function ($q) use ($configuration, $valeurSearch) {
                 foreach ($configuration['search_in'] as $index => $champ) {
                     $methode = $index === 0 ? 'where' : 'orWhere';
-                    $q->$methode($champ, 'like', "%{$valeurSearch}%");
+                    $q->$methode($champ, 'Ilike', "%{$valeurSearch}%");
                 }
             });
         }
