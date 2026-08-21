@@ -92,4 +92,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Utilisateurs_Mobile::class, FieldName::ACTEUR_MOBILE_ID);
     }
+
+    public function epasse(): HasMany
+    {
+        return $this->hasMany(Epasses::class, FieldName::ACTEUR_MOBILE_ID);
+    }
 }
