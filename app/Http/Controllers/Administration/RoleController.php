@@ -13,11 +13,13 @@ use App\Http\Controllers\BaseController\BaseController;
 
 class RoleController extends BaseController
 {
+    protected $recherche = ['search_in' => [FieldName::NOM],];
     public function index()
     {
-        $roles = Role::query();
-        $roles = Helper::filtrer($roles, [FieldName::NOM]);
-        return $this->sendResponse(RoleResource::collection($roles), "Liste des rôles récupérée avec succès.");
+        $roles = Role::withCount('Administrateurs');
+        $roles = Helper::filtrer($roles, $this->recherche);
+        $rolesResultats = $roles->get();
+        return $this->sendResponse(RoleResource::collection($rolesResultats), "Liste des rôles récupérée avec succès.");
     }
 
     public function store(StoreRoleRequest $request)

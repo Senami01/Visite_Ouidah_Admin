@@ -16,9 +16,9 @@ class RoleResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            FieldName::ID => $this->{FieldName::ID},
             FieldName::NOM => $this->{FieldName::NOM},
             FieldName::DESCRIPTION => $this->{FieldName::DESCRIPTION},
+            'utilisateurs' => $this->administrateurs_count ?? 0,
         ];
     }
 }
