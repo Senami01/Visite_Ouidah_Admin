@@ -25,7 +25,6 @@ class AdminController extends BaseController
         ],
         'champs' => [
             FieldName::STATUT,
-            FieldName::TYPE,
         ]
     ];
     public function index()
