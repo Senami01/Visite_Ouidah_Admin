@@ -21,7 +21,7 @@ class AdminResource extends JsonResource
             FieldName::EMAIL => $this->{FieldName::EMAIL},
             'role' => $this->relationLoaded('role') ? $this->role?->{FieldName::NOM} : null,
             FieldName::TELEPHONE => $this->{FieldName::TELEPHONE},
-            FieldName::STATUT => $this->{FieldName::STATUT},
+            FieldName::STATUT => $this->{FieldName::STATUT} ? 'Actif' : 'Désactivé',
             FieldName::DERNIERE_CONNEXION => $this->{FieldName::DERNIERE_CONNEXION}, 
         ];
     }
