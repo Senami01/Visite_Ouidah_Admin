@@ -28,4 +28,9 @@ class Visiteurs extends Model
     {
         return $this->hasMany(Epasses::class, FieldName::VISITEUR_ID);
     }
+
+    public function visite(): HasMany
+    {
+        return $this->hasMany(Visites::class, FieldName::VISITEUR_ID);
+    }
 }
