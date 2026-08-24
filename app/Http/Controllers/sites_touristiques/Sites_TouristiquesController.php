@@ -10,16 +10,22 @@ use App\Http\Resources\Sites_Touristiques\SitesTouristiquesResource;
 use Illuminate\Support\Str;
 use App\Lib\FieldName;
 use App\Lib\Constant;
+use App\Lib\Helper;
 
 class Sites_TouristiquesController extends BaseController
 {
+    protected $recherche = [
+        FieldName::TYPE_TARIFICATION,
+        FieldName::CATEGORIE,
+    ];
     public function index()
     {
-        $sites = Sites_Touristiques::all();
-        return $this->sendResponse(
-            SitesTouristiquesResource::collection($sites),
-            "Liste des sites touristiques récupérée avec succès."
-        );
+        $requete = Sites_Touristiques::query();
+
+        $requete = Helper::filtrer($requete, $this->recherche);
+        $page = $requete->paginate(env('PAGE'));
+        $reponse = SitesTouristiquesResource::collection($page)->toResponse(request())->getData();
+        return $this->sendResponse($reponse, "Liste des sites touristiques récupérée avec succès.");
     }
 
     public function changementStatus($id)

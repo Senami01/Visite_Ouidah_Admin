@@ -59,7 +59,7 @@ class SitesTouristiquesSeeder extends Seeder
                 FieldName::OUVERT_24_7 => true,
                 FieldName::STATUT => 'publie',
                 FieldName::INDICATIONS => "Le site est accessible à pied depuis le centre-ville. Il est recommandé de porter des chaussures confortables.",
-                 FieldName::CREATED_BY => User::where([
+                FieldName::CREATED_BY => User::where([
                     FieldName::TYPE => Constant::ADMINISTRATEUR, // Changé pour la constante
                     FieldName::NOM => 'SOHOU',
                     FieldName::PRENOM => 'Aline'
