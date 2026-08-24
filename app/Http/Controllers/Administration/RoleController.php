@@ -13,7 +13,7 @@ use App\Http\Controllers\BaseController\BaseController;
 
 class RoleController extends BaseController
 {
-    protected $recherche = ['search_in' => [FieldName::NOM],];
+    protected $recherche = [FieldName::NOM];
     public function index()
     {
         $roles = Role::withCount('Administrateurs');

@@ -39,36 +39,61 @@ class Helper
     }
 
 
-    public static function filtrer(Builder $query, array $configuration = []): Builder
+    public static function filtrer(Builder $query, array $configuration = [], array $optionsTri = []): Builder
     {
         $request = request();
+        
+        foreach ($configuration as $champ) {
+            if (Str::contains(Str::lower($champ), 'date') || Str::contains(Str::lower($champ), 'at')) {
+                
+                $dateDebut = $request->input('date_debut');
+                $dateFin = $request->input('date_fin');
 
-        if ($request->filled('search') && isset($configuration['search_in'])) {
-            $valeurSearch = $request->input('search');
-            
-            $query->where(function ($q) use ($configuration, $valeurSearch) {
-                foreach ($configuration['search_in'] as $index => $champ) {
-                    $methode = $index === 0 ? 'where' : 'orWhere';
-                    $q->$methode($champ, 'Ilike', "%{$valeurSearch}%");
+                if ($request->filled('date_debut') && $request->filled('date_fin')) {
+                    $query->whereBetween($champ, [$dateDebut, $dateFin]);
+                } elseif ($request->filled('date_debut')) {
+                    $query->where($champ, '>=', $dateDebut);
+                } elseif ($request->filled('date_fin')) {
+                    $query->where($champ, '<=', $dateFin);
                 }
-            });
-        }
+                continue; 
+            }
 
-        if (isset($configuration['champs'])) {
-            foreach ($configuration['champs'] as $champ) {
-                if ($request->filled($champ)) {
-                    $valeur = $request->input($champ);
-                    if ($valeur === 'all') {
-                        continue;
-                    }
+            if ($request->filled($champ)) {
+                $valeur = $request->input($champ);
+                if ($valeur === 'all') {
+                    continue;
+                }
+                if (is_numeric($valeur) || $valeur === 'true' || $valeur === 'false') {
+                    $query->where($champ, $valeur);
+                } else {
                     if (str_contains($valeur, '*')) {
                         $valeurNettoyee = str_replace('*', '%', $valeur);
-                        $query->where($champ, 'like', $valeurNettoyee);
+                        $query->where($champ, 'ilike', $valeurNettoyee);
                     } else {
-                        $query->where($champ, $valeur);
+                        $query->where($champ, 'ilike', '%' . $valeur . '%');
                     }
                 }
             }
+        }
+        if ($request->filled('sort')) {
+            $sort = $request->input('sort');
+
+            $colonneCandidate = null;
+            $direction = null;
+            if (Str::endsWith($sort, '_az')) {
+                $colonneCandidate = Str::beforeLast($sort, '_az');
+                $direction = 'asc';
+            } elseif (Str::endsWith($sort, '_za')) {
+                $colonneCandidate = Str::beforeLast($sort, '_za');
+                $direction = 'desc';
+            }
+
+            if ($colonneCandidate && in_array($colonneCandidate, $optionsTri)) {
+                $query->orderBy($colonneCandidate, $direction);
+            }
+        } else {
+            $query->latest(); 
         }
         return $query;
     }

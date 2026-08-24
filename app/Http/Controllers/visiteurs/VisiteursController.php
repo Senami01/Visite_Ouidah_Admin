@@ -12,29 +12,15 @@ use Illuminate\Http\Request;
 class VisiteursController extends BaseController
 {
     protected $recherche = [
-        'search_in' => [
             FieldName::NOM,
             FieldName::PRENOM,
             FieldName::PAYS,
-        ],
-        'champs' => [
-            FieldName::PAYS,
-        ]
     ];
+    protected $tri = [FieldName::PAYS];
     public function index()
     {
         $requete = Visiteurs::query();
-        $requete = Helper::filtrer($requete, $this->recherche);
-        if (request()->filled('sort')) {
-        $sort = request()->input('sort');
-            if ($sort === 'pays_az') {
-                $requete->orderBy(FieldName::PAYS, 'asc');
-            } elseif ($sort === 'pays_za') {
-                $requete->orderBy(FieldName::PAYS, 'desc');
-            }
-        } else {
-            $requete->latest(); 
-        }
+        $requete = Helper::filtrer($requete, $this->recherche, $this->tri);
         $page = $requete->paginate(env('PAGE'));
         $reponse = VisiteursResource::collection($page)->toResponse(request())->getData();
         return $this->sendResponse($reponse, "Liste des visiteurs récupérée avec succès.");
@@ -51,9 +37,13 @@ class VisiteursController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $visiteur = Visiteurs::find($id);
+        if (!$visiteur) {
+            return $this->sendError("Visiteur non trouvé.", [], 404);
+        }
+        return $this->sendResponse(new VisiteursResource($visiteur), 'Détails du visiteur récupérés avec succès.');
     }
 
     /**

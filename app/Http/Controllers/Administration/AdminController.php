@@ -17,15 +17,11 @@ class AdminController extends BaseController
 {
     private const TYPE_ADMIN = Constant::ADMINISTRATEUR;
     protected $recherche = [
-        'search_in' => [
-            FieldName::NOM,
-            FieldName::PRENOM,
-            FieldName::EMAIL,
-            FieldName::TELEPHONE,
-        ],
-        'champs' => [
-            FieldName::STATUT,
-        ]
+        FieldName::NOM,
+        FieldName::PRENOM,
+        FieldName::EMAIL,
+        FieldName::TELEPHONE,
+        FieldName::STATUT,
     ];
     public function index()
     {
