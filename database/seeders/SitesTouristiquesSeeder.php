@@ -39,6 +39,11 @@ class SitesTouristiquesSeeder extends Seeder
                     FieldName::NOM => 'AGBOSSA',
                     FieldName::PRENOM => 'Marc'
                 ])->value(FieldName::ID), 
+                FieldName::ACTEUR_MOBILE_ID => User::where([
+                    FieldName::TYPE => Constant::ACTEUR_MOBILE, // Changé pour la constante
+                    FieldName::NOM => 'AGBOSSA',
+                    FieldName::PRENOM => 'Marc'
+                ])->value(FieldName::ID),
             ],
             [
                 FieldName::NOM => "Porte du Non-Retour",
@@ -59,6 +64,11 @@ class SitesTouristiquesSeeder extends Seeder
                     FieldName::NOM => 'SOHOU',
                     FieldName::PRENOM => 'Aline'
                 ])->value(FieldName::ID), 
+                FieldName::ACTEUR_MOBILE_ID => User::where([
+                    FieldName::TYPE => Constant::ACTEUR_MOBILE, // Changé pour la constante
+                    FieldName::NOM => 'SOHOU',
+                    FieldName::PRENOM => 'Aline'
+                ])->value(FieldName::ID),
             ],
         ];
 
