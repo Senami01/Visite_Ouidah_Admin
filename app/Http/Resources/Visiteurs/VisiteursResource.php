@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Resources\Administration;
+namespace App\Http\Resources\Visiteurs;
 
 use App\Lib\FieldName;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AdminResource extends JsonResource
+class VisiteursResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,11 +18,10 @@ class AdminResource extends JsonResource
         return [
             FieldName::NOM => $this->{FieldName::NOM},
             FieldName::PRENOM => $this->{FieldName::PRENOM},
-            FieldName::EMAIL => $this->{FieldName::EMAIL},
-            'role' => $this->relationLoaded('role') ? $this->role?->{FieldName::NOM} : null,
+            FieldName::PAYS => $this->{FieldName::PAYS},
             FieldName::TELEPHONE => $this->{FieldName::TELEPHONE},
-            FieldName::STATUT => $this->{FieldName::STATUT} ? 'Actif' : 'Désactivé',
-            FieldName::DERNIERE_CONNEXION => $this->{FieldName::DERNIERE_CONNEXION}, 
+            'epasses' => $this->epasse_count ?? 0,
+            'visites' => $this->visite_count ?? 0,
         ];
     }
 }
