@@ -15,7 +15,6 @@ class SitesTouristiquesResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            FieldName::ID => $this->{FieldName::ID},
             FieldName::NOM => $this->{FieldName::NOM},
             FieldName::CATEGORIE => $this->{FieldName::CATEGORIE},
             FieldName::LATITUDE => $this->{FieldName::LATITUDE},
@@ -23,7 +22,8 @@ class SitesTouristiquesResource extends JsonResource
             FieldName::COURTE_DESCRIPTION => $this->{FieldName::COURTE_DESCRIPTION},
             FieldName::CREATED_BY => $this->{FieldName::CREATED_BY},
             FieldName::ACTEUR_MOBILE_ID => $this->{FieldName::ACTEUR_MOBILE_ID},
-            FieldName::INDICATIONS => $this->{FieldName::INDICATIONS}
+            FieldName::OUVERT_24_7 => $this->{FieldName::OUVERT_24_7},
+            FieldName::TYPE_TARIFICATION => $this->{FieldName::TYPE_TARIFICATION},
         ];
     }
 }

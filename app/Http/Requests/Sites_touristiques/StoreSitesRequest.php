@@ -55,12 +55,20 @@ class StoreSitesRequest extends FormRequest
         return [
             FieldName::NOM . '.required' => 'Le nom est requis.',
             FieldName::CATEGORIE . '.required' => 'La catégorie est requise.',
-           FieldName::INDICATIONS . '.required' => 'Les indications sont requises.',
+            FieldName::INDICATIONS . '.required' => 'Les indications sont requises.',
             FieldName::LATITUDE . '.numeric' => 'La latitude doit être un nombre valide.',
             FieldName::LONGITUDE . '.numeric' => 'La longitude doit être un nombre valide.',
             FieldName::ACTEUR_MOBILE_ID . '.uuid' => "L'ID de l'acteur mobile doit être un UUID valide.",
-             FieldName::CREATED_BY . '.required' => 'L\'ID de l\'utilisateur créateur est requis.',
-             FieldName::CREATED_BY . '.uuid' => "L'ID de l'utilisateur créateur doit être un UUID valide.",
+            FieldName::CREATED_BY . '.required' => 'L\'ID de l\'utilisateur créateur est requis.',
+            FieldName::CREATED_BY . '.uuid' => "L'ID de l'utilisateur créateur doit être un UUID valide.",
+            FieldName::OUVERT_24_7 . '.boolean' => 'Le champ "ouvert 24/7" doit être vrai ou faux.',
+            FieldName::STATUT . '.required' => 'Le statut est requis.',
+            FieldName::ACCES . '.required' => "Le champ d'accès est requis.",
+            FieldName::A_PROPOS_TITRE . '.required' => 'Le titre "À propos" est requis.',
+            FieldName::A_PROPOS_DESCRIPTION . '.required' => 'La description "À propos" est requise.',
+            FieldName::CONSEILS_PRATIQUES . '.required' => 'Les conseils pratiques sont requis.',
+            FieldName::TYPE_TARIFICATION . '.required' => 'Le type de tarification est requis.',
+           
         ];
     }
 }

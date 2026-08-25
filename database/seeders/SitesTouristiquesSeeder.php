@@ -39,6 +39,11 @@ class SitesTouristiquesSeeder extends Seeder
                     FieldName::NOM => 'AGBOSSA',
                     FieldName::PRENOM => 'Marc'
                 ])->value(FieldName::ID), 
+                FieldName::ACTEUR_MOBILE_ID => User::where([
+                    FieldName::TYPE => Constant::ACTEUR_MOBILE, // Changé pour la constante
+                    FieldName::NOM => 'AGBOSSA',
+                    FieldName::PRENOM => 'Marc'
+                ])->value(FieldName::ID),
             ],
             [
                 FieldName::NOM => "Porte du Non-Retour",
@@ -54,11 +59,16 @@ class SitesTouristiquesSeeder extends Seeder
                 FieldName::OUVERT_24_7 => true,
                 FieldName::STATUT => 'publie',
                 FieldName::INDICATIONS => "Le site est accessible à pied depuis le centre-ville. Il est recommandé de porter des chaussures confortables.",
-                 FieldName::CREATED_BY => User::where([
+                FieldName::CREATED_BY => User::where([
                     FieldName::TYPE => Constant::ADMINISTRATEUR, // Changé pour la constante
                     FieldName::NOM => 'SOHOU',
                     FieldName::PRENOM => 'Aline'
                 ])->value(FieldName::ID), 
+                FieldName::ACTEUR_MOBILE_ID => User::where([
+                    FieldName::TYPE => Constant::ACTEUR_MOBILE, // Changé pour la constante
+                    FieldName::NOM => 'SOHOU',
+                    FieldName::PRENOM => 'Aline'
+                ])->value(FieldName::ID),
             ],
         ];
 
