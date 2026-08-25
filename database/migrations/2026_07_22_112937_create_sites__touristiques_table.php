@@ -21,22 +21,18 @@ return new class extends Migration
         $table->string(FieldName::CATEGORIE)->nullable(); 
         $table->decimal(FieldName::LATITUDE, 10, 8)->nullable(); 
         $table->decimal(FieldName::LONGITUDE, 11, 8)->nullable(); 
-        // 💡 Ajout de ->nullable() sur les champs secondaires pour éviter les erreurs PostgreSQL
         $table->text(FieldName::ACCES)->nullable();
         $table->text(FieldName::COURTE_DESCRIPTION)->nullable();
         $table->string(FieldName::A_PROPOS_TITRE)->nullable();
         $table->text(FieldName::A_PROPOS_DESCRIPTION)->nullable();
         $table->text(FieldName::CONSEILS_PRATIQUES)->nullable();
-        $table->text(FieldName::INDICATIONS)->nullable();
         $table->enum(FieldName::TYPE_TARIFICATION, [Constant::UNIQUE, Constant::DOUBLE])->nullable();
         $table->boolean(FieldName::OUVERT_24_7)->default(false);
         $table->enum(FieldName::STATUT, [Constant::BROUILLON, Constant::PUBLIE, Constant::DESACTIVE])->default(Constant::BROUILLON);
         $table->timestamp(FieldName::DATE_BROUILLON)->nullable();
         $table->timestamp(FieldName::DATE_PUBLICATION)->nullable();
-        // Clés étrangères (ajoutez ->nullable() si un site n'est pas forcément lié à un acteur mobile au départ)
         $table->foreignUuid(FieldName::CREATED_BY)->references(FieldName::ID)->on(TableName::USERS)->cascadeOnDelete();
         $table->foreignUuid(FieldName::ACTEUR_MOBILE_ID)->nullable()->references(FieldName::ID)->on(TableName::UTILISATEURS_MOBILE)->cascadeOnDelete();
-        
         $table->timestamps();
         });
 

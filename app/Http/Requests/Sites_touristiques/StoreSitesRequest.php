@@ -5,6 +5,9 @@ namespace App\Http\Requests\Sites_touristiques;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Lib\FieldName;
+use App\Lib\Constant;
+use App\Lib\TableName;
+use Illuminate\Validation\Rule;
 
 class StoreSitesRequest extends FormRequest
 {
@@ -24,14 +27,26 @@ class StoreSitesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            FieldName::NOM => 'required|string',
-            FieldName::CATEGORIE => 'nullable|string',
-            FieldName::LATITUDE => 'nullable|numeric',
-            FieldName::LONGITUDE => 'nullable|numeric',
-            FieldName::ACTEUR_MOBILE_ID => 'nullable|uuid',
-            FieldName::COURTE_DESCRIPTION => 'nullable|string',
-            FieldName::INDICATIONS => 'nullable|string', 
-            FieldName::CREATED_BY => 'required|uuid',
+            FieldName::NOM                 => 'required|string|max:255',
+            FieldName::CATEGORIE           => 'required|string|max:255',
+            FieldName::LATITUDE            => 'required|numeric|between:-90,90',
+            FieldName::LONGITUDE           => 'required|numeric|between:-180,180',
+            FieldName::ACCES               => 'required|string',
+            FieldName::COURTE_DESCRIPTION  => 'required|string',
+            FieldName::A_PROPOS_TITRE      => 'required|string|max:255',
+            FieldName::A_PROPOS_DESCRIPTION => 'required|string',
+            FieldName::CONSEILS_PRATIQUES  => 'required|string',
+            FieldName::TYPE_TARIFICATION   => ['required', Rule::in([Constant::UNIQUE, Constant::DOUBLE])],
+            FieldName::OUVERT_24_7         => 'boolean',
+            FieldName::STATUT              => ['required', Rule::in([Constant::BROUILLON, Constant::PUBLIE, Constant::DESACTIVE])],
+            FieldName::ACTEUR_MOBILE_ID    => ['required', 'uuid', Rule::exists(TableName::UTILISATEURS_MOBILE, FieldName::ID)],
+            FieldName::CREATED_BY          => [
+                'required',
+                'uuid',
+                Rule::exists(TableName::USERS, FieldName::ID)->where(function ($query) {
+                    $query->where(FieldName::TYPE, Constant::ADMINISTRATEUR);
+                }),
+            ],
         ];
     }
 
