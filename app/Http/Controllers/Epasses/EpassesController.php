@@ -21,7 +21,7 @@ class EpassesController extends BaseController
 
     public function index()
     {
-        $requete = Epasses::query();
+        $requete = Epasses::orderBy(FieldName::CREATED_AT, 'desc');
         $requete = Helper::filtrer($requete, $this->recherche);
         $page = $requete->paginate(env('PAGE'));
         $reponse = EpassesResource::collection($page)->toResponse(request())->getData();

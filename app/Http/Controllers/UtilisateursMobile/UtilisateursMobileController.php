@@ -21,7 +21,7 @@ class UtilisateursMobileController extends BaseController
     ];
     public function index()
     {
-       $utilisateur = Utilisateurs_Mobile::query();
+       $utilisateur = Utilisateurs_Mobile::orderBy(FieldName::CREATED_AT, 'desc');
         $utilisateur = Helper::filtrer($utilisateur, $this->re);
         $pa = $utilisateur->paginate(env('PAGE'));
         $reponse = UtilisateursMobileResource::collection($pa)->toResponse(request())->getData(true);

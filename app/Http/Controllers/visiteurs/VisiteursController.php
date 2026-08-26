@@ -12,31 +12,20 @@ use Illuminate\Http\Request;
 class VisiteursController extends BaseController
 {
     protected $recherche = [
-            FieldName::NOM,
-            FieldName::PRENOM,
+            FieldName::DATE_VISITE,
             FieldName::PAYS,
+            FieldName::SITE_ID,
     ];
     protected $tri = [FieldName::PAYS];
     public function index()
     {
-        $requete = Visiteurs::query();
+        $requete = Visiteurs::orderBy(FieldName::CREATED_AT, 'desc');
         $requete = Helper::filtrer($requete, $this->recherche, $this->tri);
         $page = $requete->paginate(env('PAGE'));
         $reponse = VisiteursResource::collection($page)->toResponse(request())->getData();
         return $this->sendResponse($reponse, "Liste des visiteurs récupérée avec succès.");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show($id)
     {
         $visiteur = Visiteurs::find($id);
@@ -44,21 +33,5 @@ class VisiteursController extends BaseController
             return $this->sendError("Visiteur non trouvé.", [], 404);
         }
         return $this->sendResponse(new VisiteursResource($visiteur), 'Détails du visiteur récupérés avec succès.');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

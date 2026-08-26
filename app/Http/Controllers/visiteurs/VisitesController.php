@@ -14,10 +14,12 @@ class VisitesController extends BaseController
     protected $recherche = [
         FieldName::STATUT,
         FieldName::SITE_ID,
+        FieldName::DATE_VISITE,
     ];
-    public function index()
+    public function index(string $id)
     {
-        $requete = Visites::query();
+        $requete = Visites::where(FieldName::VISITEUR_ID, $id)
+            ->orderBy(FieldName::CREATED_AT, 'desc');
         $requete = Helper::filtrer($requete, $this->recherche);
         $page = $requete->paginate(env('PAGE'));
         $reponse = VisitesResource::collection($page)->toResponse(request())->getData();
