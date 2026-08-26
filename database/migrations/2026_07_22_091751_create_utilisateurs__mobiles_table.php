@@ -21,10 +21,10 @@ return new class extends Migration
             $table->string(FieldName::EMAIL, 150)->unique();
             $table->string(FieldName::TELEPHONE, 20);
             $table->string(FieldName::PAYS, 100);
-            $table->string(FieldName::ROLE);
+            $table->string(FieldName::ROLE)->nullable();
             $table->foreignUuid(FieldName::ACTEUR_MOBILE_ID)->references(FieldName::ID)->on(TableName::USERS)->cascadeOnDelete();
             $table->enum(FieldName::STATUT,[Constant::ACTIF, Constant::DESACTIVE]);
-            $table->timestamp(FieldName::DERNIERE_CONNEXION);
+            $table->timestamp(FieldName::DERNIERE_CONNEXION)->nullable();
             $table->timestamps();
         });
     }

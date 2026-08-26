@@ -2,17 +2,31 @@
 
 namespace App\Http\Controllers\Epasses;
 
-use App\Http\Controllers\Controller;
+use App\Models\Epasses;
+use App\Lib\FieldName;
+use App\Lib\Helper;
+use App\Http\Controllers\BaseController\BaseController;
+use App\Http\Resources\Epasses\EpassesResource;
 use Illuminate\Http\Request;
 
-class EpassesController extends Controller
+class EpassesController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
+    protected $recherche = [
+        FieldName::STATUT,
+        FieldName::TYPE_INITIATEUR,
+    ];
+
     public function index()
     {
-        //
+        $requete = Epasses::query();
+        $requete = Helper::filtrer($requete, $this->recherche);
+        $page = $requete->paginate(env('PAGE'));
+        $reponse = EpassesResource::collection($page)->toResponse(request())->getData();
+        
+        return $this->sendResponse($reponse, "Liste des e-passes récupérée avec succès.");
     }
 
     /**

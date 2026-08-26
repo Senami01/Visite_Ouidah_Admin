@@ -5,11 +5,14 @@ namespace App\Models;
 use App\Lib\TableName;
 use App\Lib\FieldName;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
 class Utilisateurs_Mobile extends Model
 {
+    use HasUuids;
+
     protected $table = TableName::UTILISATEURS_MOBILE;
     protected $primaryKey = FieldName::ID;
     protected $fillable = [

@@ -5,6 +5,9 @@ namespace App\Http\Requests\Sites_touristiques;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Lib\FieldName;
+use App\Lib\Constant;
+use App\Lib\TableName;
+use Illuminate\Validation\Rule;
 
 class StoreSitesRequest extends FormRequest
 {
@@ -28,17 +31,20 @@ class StoreSitesRequest extends FormRequest
             FieldName::CATEGORIE => 'required|string',
             FieldName::LATITUDE => 'required|numeric',
             FieldName::LONGITUDE => 'required|numeric',
-            FieldName::ACTEUR_MOBILE_ID => 'nullable|uuid',
-            FieldName::COURTE_DESCRIPTION => 'nullable|string',
-            FieldName::CREATED_BY => 'required|uuid',
-            FieldName::OUVERT_24_7 => 'required|boolean',
-            FieldName::STATUT => 'required|string',
             FieldName::ACCES => 'required|string',
+            FieldName::COURTE_DESCRIPTION => 'required|string',
             FieldName::A_PROPOS_TITRE => 'required|string',
             FieldName::A_PROPOS_DESCRIPTION => 'required|string',
             FieldName::CONSEILS_PRATIQUES => 'required|string',
-            FieldName::TYPE_TARIFICATION => 'required|string',
-           
+            FieldName::TYPE_TARIFICATION => ['required', Rule::in([Constant::UNIQUE, Constant::DOUBLE])],
+            FieldName::OUVERT_24_7 => 'required|boolean',
+            FieldName::STATUT => ['required', Rule::in([Constant::BROUILLON, Constant::PUBLIE, Constant::DESACTIVE])],
+            FieldName::ACTEUR_MOBILE_ID => ['required', 'uuid', Rule::exists(TableName::USERS, FieldName::ID)->where(function ($query) {
+                    $query->where(FieldName::TYPE, Constant::ACTEUR_MOBILE);})],
+            FieldName::CREATED_BY => ['required','uuid',Rule::exists(TableName::USERS, FieldName::ID)->where(function ($query) {
+                    $query->where(FieldName::TYPE, Constant::ADMINISTRATEUR);
+                }),
+            ],
         ];
     }
 
@@ -47,7 +53,6 @@ class StoreSitesRequest extends FormRequest
         return [
             FieldName::NOM . '.required' => 'Le nom est requis.',
             FieldName::CATEGORIE . '.required' => 'La catégorie est requise.',
-            FieldName::INDICATIONS . '.required' => 'Les indications sont requises.',
             FieldName::LATITUDE . '.numeric' => 'La latitude doit être un nombre valide.',
             FieldName::LONGITUDE . '.numeric' => 'La longitude doit être un nombre valide.',
             FieldName::ACTEUR_MOBILE_ID . '.uuid' => "L'ID de l'acteur mobile doit être un UUID valide.",

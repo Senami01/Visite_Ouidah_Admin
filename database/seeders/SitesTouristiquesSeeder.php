@@ -16,9 +16,6 @@ class SitesTouristiquesSeeder extends Seeder
      */
     public function run(): void
     {
-
-         
-
         $sites = [
             [
                 FieldName::NOM => "Temple des Pythons",
@@ -33,7 +30,6 @@ class SitesTouristiquesSeeder extends Seeder
                 FieldName::TYPE_TARIFICATION => "double",
                 FieldName::OUVERT_24_7 => true,
                 FieldName::STATUT => 'publie',
-                FieldName::INDICATIONS => "Le site est accessible à pied depuis le centre-ville. Il est recommandé de porter des chaussures confortables.",
                 FieldName::CREATED_BY => User::where([
                     FieldName::TYPE => Constant::ADMINISTRATEUR, // Changé pour la constante
                     FieldName::NOM => 'AGBOSSA',
@@ -57,7 +53,6 @@ class SitesTouristiquesSeeder extends Seeder
                 FieldName::TYPE_TARIFICATION => "unique",
                 FieldName::OUVERT_24_7 => true,
                 FieldName::STATUT => 'publie',
-                FieldName::INDICATIONS => "Le site est accessible à pied depuis le centre-ville. Il est recommandé de porter des chaussures confortables.",
                 FieldName::CREATED_BY => User::where([
                     FieldName::TYPE => Constant::ADMINISTRATEUR, // Changé pour la constante
                     FieldName::NOM => 'SOHOU',
