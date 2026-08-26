@@ -3,6 +3,9 @@
 namespace App\Http\Resources\Epasses;
 
 use App\Lib\FieldName;
+use App\Http\Resources\Epasses\EpassLigneResource;
+use App\Http\Resources\Epasses\EpassPersonneResource;
+use App\Http\Resources\Epasses\EpassTaxeResource;
 use Illuminate\Http\Request;
 
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -27,6 +30,9 @@ class EpassesResource extends JsonResource
             FieldName::MONTANT_TAXES => (float) $this->{FieldName::MONTANT_TAXES},
             FieldName::MONTANT_TOTAL => (float) $this->{FieldName::MONTANT_TOTAL},
             FieldName::DATE_REALISATION => $this->{FieldName::DATE_REALISATION}?->format('Y-m-d'),
+            'lignes' => EpassLigneResource::collection($this->whenLoaded('lignes')),
+            'personnes' => EpassPersonneResource::collection($this->whenLoaded('personnes')),
+            'taxes' => EpassTaxeResource::collection($this->whenLoaded('taxes')),
         ];
     }
 }

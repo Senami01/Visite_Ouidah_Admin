@@ -47,4 +47,19 @@ class Epasses extends Model
     {
         return $this->hasMany(Visites::class, FieldName::EPASS_ID);
     }
+
+    public function lignes(): HasMany
+    {
+        return $this->hasMany(Epass_Lignes::class, FieldName::EPASS_ID);
+    }
+
+    public function personnes(): HasMany
+    {
+        return $this->hasMany(Epass_Personnes::class, FieldName::EPASS_ID);
+    }
+
+    public function taxes(): HasMany
+    {
+        return $this->hasMany(Epass_Taxes::class, FieldName::EPASS_ID);
+    }
 }
