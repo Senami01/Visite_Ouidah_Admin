@@ -42,9 +42,35 @@ class Helper
     public static function filtrer(Builder $query, array $configuration = [], array $optionsTri = []): Builder
     {
         $request = request();
-        
+        if (in_array(FieldName::DATE_VISITE, $configuration)) {
+            if ($request->filled('date_debut') || $request->filled('date_fin')) {
+                $dateDebut = $request->input('date_debut');
+                $dateFin = $request->input('date_fin');
+
+                $query->whereHas('visite', function ($q) use ($dateDebut, $dateFin) {
+                    if ($dateDebut && $dateFin) {
+                        $q->whereBetween(FieldName::DATE_VISITE, [$dateDebut, $dateFin]);
+                    } elseif ($dateDebut) {
+                        $q->where(FieldName::DATE_VISITE, '>=', $dateDebut);
+                    } elseif ($dateFin) {
+                        $q->where(FieldName::DATE_VISITE, '<=', $dateFin);
+                    }
+                });
+            }
+        }
+        if (in_array(FieldName::SITE_ID, $configuration) && $request->filled('site_id')) {
+            $siteId = $request->input('site_id');
+            $query->whereHas('visite', function ($q) use ($siteId) {
+                $q->where(FieldName::SITE_ID, $siteId);
+            });
+        }
         foreach ($configuration as $champ) {
-            if (Str::contains(Str::lower($champ), 'date') || Str::contains(Str::lower($champ), 'at')) {
+            if ($champ === FieldName::DATE_VISITE || $champ === FieldName::SITE_ID) {
+                continue;
+            }
+
+            $champMinuscule = Str::lower($champ);
+            if (Str::contains($champMinuscule, 'date') || Str::endsWith($champMinuscule, '_at')) {
                 
                 $dateDebut = $request->input('date_debut');
                 $dateFin = $request->input('date_fin');
