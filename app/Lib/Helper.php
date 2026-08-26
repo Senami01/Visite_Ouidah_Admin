@@ -42,12 +42,13 @@ class Helper
     public static function filtrer(Builder $query, array $configuration = [], array $optionsTri = []): Builder
     {
         $request = request();
+        $filtrerParRelationVisite = method_exists($query->getModel(), 'visite');
         if (in_array(FieldName::DATE_VISITE, $configuration)) {
             if ($request->filled('date_debut') || $request->filled('date_fin')) {
                 $dateDebut = $request->input('date_debut');
                 $dateFin = $request->input('date_fin');
 
-                $query->whereHas('visite', function ($q) use ($dateDebut, $dateFin) {
+                $appliquerFiltreDate = function ($q) use ($dateDebut, $dateFin) {
                     if ($dateDebut && $dateFin) {
                         $q->whereBetween(FieldName::DATE_VISITE, [$dateDebut, $dateFin]);
                     } elseif ($dateDebut) {
@@ -55,14 +56,26 @@ class Helper
                     } elseif ($dateFin) {
                         $q->where(FieldName::DATE_VISITE, '<=', $dateFin);
                     }
-                });
+                };
+
+                if ($filtrerParRelationVisite) {
+                    $query->whereHas('visite', $appliquerFiltreDate);
+                } else {
+                    $appliquerFiltreDate($query);
+                }
             }
         }
         if (in_array(FieldName::SITE_ID, $configuration) && $request->filled('site_id')) {
             $siteId = $request->input('site_id');
-            $query->whereHas('visite', function ($q) use ($siteId) {
+            $appliquerFiltreSite = function ($q) use ($siteId) {
                 $q->where(FieldName::SITE_ID, $siteId);
-            });
+            };
+
+            if ($filtrerParRelationVisite) {
+                $query->whereHas('visite', $appliquerFiltreSite);
+            } else {
+                $appliquerFiltreSite($query);
+            }
         }
         foreach ($configuration as $champ) {
             if ($champ === FieldName::DATE_VISITE || $champ === FieldName::SITE_ID) {
