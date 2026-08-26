@@ -33,8 +33,7 @@ class Sites_Touristiques extends Model
         FieldName::DATE_BROUILLON,
         FieldName::DATE_PUBLICATION,
         FieldName::CREATED_BY,
-        FieldName::ACTEUR_MOBILE_ID,
-        FieldName::INDICATIONS
+        FieldName::ACTEUR_MOBILE_ID
     ];
 
     public function administrateur(): belongsTo
@@ -44,6 +43,6 @@ class Sites_Touristiques extends Model
 
     public function acteurMobile(): belongsTo
     {
-        return $this->belongsTo(Utilisateurs_Mobile::class, FieldName::ACTEUR_MOBILE_ID);
+        return $this->belongsTo(User::class, FieldName::ACTEUR_MOBILE_ID);
     }
 }

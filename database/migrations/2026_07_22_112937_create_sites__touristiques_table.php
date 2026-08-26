@@ -32,7 +32,7 @@ return new class extends Migration
         $table->timestamp(FieldName::DATE_BROUILLON)->nullable();
         $table->timestamp(FieldName::DATE_PUBLICATION)->nullable();
         $table->foreignUuid(FieldName::CREATED_BY)->references(FieldName::ID)->on(TableName::USERS)->cascadeOnDelete();
-        $table->foreignUuid(FieldName::ACTEUR_MOBILE_ID)->nullable()->references(FieldName::ID)->on(TableName::UTILISATEURS_MOBILE)->cascadeOnDelete();
+        $table->foreignUuid(FieldName::ACTEUR_MOBILE_ID)->nullable()->references(FieldName::ID)->on(TableName::USERS)->cascadeOnDelete();
         $table->timestamps();
         });
 
