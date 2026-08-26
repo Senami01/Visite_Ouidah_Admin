@@ -137,7 +137,7 @@ class FieldName
     public const TYPE = 'type';
     public const TYPE_ABONNEMENT_ID = 'type_abonnement_id';
     public const TYPE_ACTEUR = 'type_acteur';
-    public const TYPE_INIATEUR = 'type_iniateur';
+    public const TYPE_INITIATEUR = 'type_initiateur';
     public const TYPE_PIECE = 'type_piece';
     public const TYPE_TARIFICATION = 'type_tarification';
     public const URL = 'url';

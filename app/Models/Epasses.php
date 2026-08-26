@@ -14,7 +14,7 @@ class Epasses extends Model
     protected $table = TableName::EPASSES;
     protected $fillable = [
         FieldName::REFERENCE,
-        FieldName::TYPE_INIATEUR,
+        FieldName::TYPE_INITIATEUR,
         FieldName::ACTEUR_MOBILE_ID,
         FieldName::VISITEUR_ID,
         FieldName::STATUT,
