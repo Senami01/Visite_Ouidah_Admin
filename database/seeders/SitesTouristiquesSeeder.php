@@ -41,8 +41,7 @@ class SitesTouristiquesSeeder extends Seeder
                 ])->value(FieldName::ID), 
                 FieldName::ACTEUR_MOBILE_ID => User::where([
                     FieldName::TYPE => Constant::ACTEUR_MOBILE, // Changé pour la constante
-                    FieldName::NOM => 'AGBOSSA',
-                    FieldName::PRENOM => 'Marc'
+                    FieldName::NOM => 'Bénin Découverte',
                 ])->value(FieldName::ID),
             ],
             [
@@ -66,8 +65,7 @@ class SitesTouristiquesSeeder extends Seeder
                 ])->value(FieldName::ID), 
                 FieldName::ACTEUR_MOBILE_ID => User::where([
                     FieldName::TYPE => Constant::ACTEUR_MOBILE, // Changé pour la constante
-                    FieldName::NOM => 'SOHOU',
-                    FieldName::PRENOM => 'Aline'
+                    FieldName::NOM => 'Agence Sun Travel Bénin',
                 ])->value(FieldName::ID),
             ],
         ];
