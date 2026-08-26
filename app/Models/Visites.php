@@ -26,4 +26,14 @@ class Visites extends Model
     {
         return $this->belongsTo(Visiteurs::class, FieldName::VISITEUR_ID);
     }
+
+    public function siteTouristique(): belongsTo
+    {
+        return $this->belongsTo(Sites_Touristiques::class, FieldName::SITE_ID);
+    }
+
+    public function epasse(): belongsTo
+    {
+        return $this->belongsTo(Epasses::class, FieldName::EPASS_ID);
+    }
 }

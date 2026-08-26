@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Lib\TableName;
 use App\Lib\FieldName;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
@@ -40,5 +41,10 @@ class Epasses extends Model
     public function visiteur(): belongsTo
     {
         return $this->belongsTo(Visiteurs::class, FieldName::VISITEUR_ID);
+    }
+
+    public function visite(): HasMany
+    {
+        return $this->hasMany(Visites::class, FieldName::EPASS_ID);
     }
 }
