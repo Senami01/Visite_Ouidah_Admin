@@ -99,6 +99,7 @@ class FieldName
     public const NUMERO_COMPTE = 'numero_compte';
     public const NUMERO_MOBILE = 'numero_mobile';
     public const NUMERO_PIECE = 'numero_piece';
+    public const PAR_EPASS = 'par_epass';
     public const OBSERVATION = 'observation';
     public const ORDRE = 'ordre';
     public const ORDER_ID = 'order_id';

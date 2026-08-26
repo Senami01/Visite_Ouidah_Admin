@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create(TableName::SITE_TARIFS, function (Blueprint $table) {
             $table->uuid(FieldName::ID)->primary();
             $table->foreignUuid(FieldName::SITE_ID)->references(FieldName::ID)->on(TableName::SITES_TOURISTIQUES)->cascadeOnDelete();
-            $table->string(FieldName::LIBELLE);
-            $table->string(FieldName::CODE);
+            $table->string(FieldName::LIBELLE)->nullable();
+            $table->string(FieldName::CODE)->nullable();
             $table->decimal(FieldName::MONTANT);
         });
     }

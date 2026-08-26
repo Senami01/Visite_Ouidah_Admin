@@ -45,6 +45,13 @@ class StoreSitesRequest extends FormRequest
                     $query->where(FieldName::TYPE, Constant::ADMINISTRATEUR);
                 }),
             ],
+            FieldName::LIBELLE => 'required|string',
+            FieldName::MONTANT => 'required|numeric',
+            FieldName::CODE => 'nullable|string',
+            FieldName::SITE_ID => 'required|uuid|exists:' . TableName::SITES_TOURISTIQUES . ',' . FieldName::ID,
+            'montant_frais'=>'required|numeric',
+            'frais_supp.*.libelle' => 'nullable|string',
+            'frais_supp.*.montant' => 'nullable|numeric',
         ];
     }
 

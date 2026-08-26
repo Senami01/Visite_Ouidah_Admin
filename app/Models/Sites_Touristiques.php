@@ -6,6 +6,7 @@ use App\Lib\FieldName;
 use App\Lib\TableName;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\belongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Sites_Touristiques extends Model
@@ -45,4 +46,25 @@ class Sites_Touristiques extends Model
     {
         return $this->belongsTo(User::class, FieldName::ACTEUR_MOBILE_ID);
     }
+
+    public function horaires(): HasMany
+    {
+        return $this->hasMany(Site_Horaires::class, 'site_id');
+    }
+
+    public function medias(): HasMany
+    {
+        return $this->hasMany(Site_Medias::class, 'site_id');
+    }
+
+    public function tarifs(): HasMany
+    {
+        return $this->hasMany(Site_Tarifs::class, 'site_id');
+    }
+
+    public function fraisSupplementaires(): HasMany
+    {
+        return $this->hasMany(Site_Frais_Supplementaires::class, 'site_id');
+    }
+
 }

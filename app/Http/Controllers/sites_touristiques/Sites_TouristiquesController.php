@@ -18,6 +18,7 @@ class Sites_TouristiquesController extends BaseController
         FieldName::TYPE_TARIFICATION,
         FieldName::CATEGORIE,
     ];
+
     public function index()
     {
         $requete = Sites_Touristiques::query();
@@ -48,18 +49,70 @@ class Sites_TouristiquesController extends BaseController
         );
     }
 
-    public function store(StoreSitesRequest $request)
-    {   
-        $validation = $request->validated();
-        $site = Sites_Touristiques::create($validation);
-        
-        return $this->sendResponse(
-            new SitesTouristiquesResource($site),
-            "Site touristique créé avec succès.",  
-            201
-        );
-    }
 
+    public function store(StoreSitesRequest $request)
+        {   
+            $validation = $request->validated();
+
+            try {
+                // 1. Création du site principal uniquement via Eloquent
+                $site = Sites_Touristiques::create($validation);
+
+                // 2. Insertions séquentielles via les relations Eloquent (sans passer d'ID manuellement)
+                $this->enregistrerHoraires($site, $validation);
+                $this->enregistrerMedias($site, $validation);
+                $this->enregistrerTarifs($site, $validation);
+                $this->enregistrerFraisSupplementaires($site, $validation);
+
+                return (new SitesTouristiquesResource($site))
+                    ->additional([
+                        'success' => true,
+                        'message' => "Site touristique et ses configurations enregistrés avec succès."
+                    ])
+                    ->response()
+                    ->setStatusCode(201);
+
+            } catch (\Exception $e) {
+                return $this->sendError("Erreur lors de la création du site touristique.", ['error' => $e->getMessage()], 500);
+            }
+        } 
+
+        private function enregistrerHoraires(Sites_Touristiques $site, array $data): void
+        {
+            if (isset($data['horaires']) && is_array($data['horaires'])) {
+                // 💡 Eloquent injecte automatiquement le site_id dans la table site_horaire
+                $site->horaires()->createMany($data['horaires']);
+            }
+        }
+
+        private function enregistrerMedias(Sites_Touristiques $site, array $data): void
+        {
+            if (isset($data['medias']) && is_array($data['medias'])) {
+                $site->medias()->createMany($data['medias']);
+            }
+        }
+
+        private function enregistrerTarifs(Sites_Touristiques $site, array $data): void
+        {
+            if (isset($data['tarifs']) && is_array($data['tarifs'])) {
+                $site->tarifs()->createMany($data['tarifs']);
+            }
+        }
+
+        private function enregistrerFraisSupplementaires(Sites_Touristiques $site, array $data): void
+        {
+            if (isset($data['frais_supp']) && is_array($data['frais_supp'])) {
+                foreach ($data['frais_supp'] as $frais) {
+                    // 💡 Utilisation stricte de vos clés FieldName via la relation Eloquent
+                    $site->fraisSupplementaires()->create([
+                        FieldName::LIBELLE => $frais['libelle'] ?? null, 
+                        FieldName::MONTANT => $frais['montant'] ?? 0,
+                        FieldName::PAR_EPASS => $frais['par_epass'] ?? false,
+                    ]);
+                }
+            }
+    }
+   
     public function show($id)
     {
         $site = Sites_Touristiques::find($id);
@@ -103,7 +156,6 @@ class Sites_TouristiquesController extends BaseController
 
     public function destroy($id)
     {
-        
         if (!Str::isUuid($id)) {
             return $this->sendError("Site touristique non trouvé.", [], 404);
         }

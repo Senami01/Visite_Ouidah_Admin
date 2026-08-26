@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Lib\TableName;
 use App\Lib\FieldName;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\belongsTo;
 
 class Site_Tarifs extends Model
 {
@@ -16,4 +17,9 @@ class Site_Tarifs extends Model
         FieldName::CODE,
         FieldName::MONTANT
     ];
+
+    public function site(): belongsTo
+    {
+        return $this->belongsTo(Sites_Touristiques::class, FieldName::SITE_ID);
+    }
 }
