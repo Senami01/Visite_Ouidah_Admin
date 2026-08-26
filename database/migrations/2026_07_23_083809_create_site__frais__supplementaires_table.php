@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignUuid(FieldName::SITE_ID)->references(FieldName::ID)->on(TableName::SITES_TOURISTIQUES)->cascadeOnDelete();
             $table->string(FieldName::LIBELLE);
             $table->decimal(FieldName::MONTANT);
+            $table->boolean(FieldName::PAR_EPASS)->default(false);
         });
     }
 

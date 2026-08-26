@@ -4,6 +4,7 @@ namespace App\Models;
 use App\Lib\TableName;
 use App\Lib\FieldName;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\belongsTo;
 
 class Site_Medias extends Model
 {
@@ -16,4 +17,10 @@ class Site_Medias extends Model
         FieldName::EST_COUVERTURE,
         FieldName::ORDRE
     ];
+
+    public function site(): belongsTo
+    {
+        return $this->belongsTo(Sites_Touristiques::class, FieldName::SITE_ID);
+    }
+
 }

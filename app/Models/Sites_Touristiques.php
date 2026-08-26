@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Sites_Touristiques extends Model
 {
-     use HasUuids; // 💡 Activation de la génération automatique de l'id UUID
+     use HasUuids; 
 
     protected $keyType = 'string';
     public $incrementing = false;
@@ -34,8 +34,7 @@ class Sites_Touristiques extends Model
         FieldName::DATE_BROUILLON,
         FieldName::DATE_PUBLICATION,
         FieldName::CREATED_BY,
-        FieldName::ACTEUR_MOBILE_ID,
-        FieldName::INDICATIONS
+        FieldName::ACTEUR_MOBILE_ID
     ];
 
     public function administrateur(): belongsTo
@@ -45,11 +44,31 @@ class Sites_Touristiques extends Model
 
     public function acteurMobile(): belongsTo
     {
-        return $this->belongsTo(Utilisateurs_Mobile::class, FieldName::ACTEUR_MOBILE_ID);
+        return $this->belongsTo(User::class, FieldName::ACTEUR_MOBILE_ID);
     }
 
     public function visite(): HasMany
     {
         return $this->hasMany(Visites::class, FieldName::SITE_ID);
     }
+    public function horaires(): HasMany
+    {
+        return $this->hasMany(Site_Horaires::class, 'site_id');
+    }
+
+    public function medias(): HasMany
+    {
+        return $this->hasMany(Site_Medias::class, 'site_id');
+    }
+
+    public function tarifs(): HasMany
+    {
+        return $this->hasMany(Site_Tarifs::class, 'site_id');
+    }
+
+    public function fraisSupplementaires(): HasMany
+    {
+        return $this->hasMany(Site_Frais_Supplementaires::class, 'site_id');
+    }
+
 }

@@ -99,6 +99,7 @@ class FieldName
     public const NUMERO_COMPTE = 'numero_compte';
     public const NUMERO_MOBILE = 'numero_mobile';
     public const NUMERO_PIECE = 'numero_piece';
+    public const PAR_EPASS = 'par_epass';
     public const OBSERVATION = 'observation';
     public const ORDRE = 'ordre';
     public const ORDER_ID = 'order_id';
@@ -140,6 +141,7 @@ class FieldName
     public const TYPE_INITIATEUR = 'type_initiateur';
     public const TYPE_PIECE = 'type_piece';
     public const TYPE_TARIFICATION = 'type_tarification';
+    public const UTILISATEUR_MOBILE_ID = 'utilisateur_mobile_id';
     public const URL = 'url';
     public const VALIDE_PAR = 'valide_par';
     public const VISITEUR_ID = 'visiteur_id';

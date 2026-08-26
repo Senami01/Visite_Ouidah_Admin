@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create(TableName::EPASSES, function (Blueprint $table) {
             $table->uuid(FieldName::ID)->primary();
             $table->string(FieldName::REFERENCE)->unique();
-            $table->enum(FieldName::TYPE_INIATEUR, [Constant::GUIDE, Constant::AGENCE, Constant::VISITEUR]);
+            $table->enum(FieldName::TYPE_INITIATEUR, [Constant::GUIDE, Constant::AGENCE, Constant::VISITEUR]);
             $table->foreignUuid(FieldName::ACTEUR_MOBILE_ID)->references(FieldName::ID)->on(TableName::USERS)->cascadeOnDelete();
             $table->foreignUuid(FieldName::VISITEUR_ID)->references(FieldName::ID)->on(TableName::VISITEURS)->cascadeOnDelete();
             $table->enum(FieldName::STATUT, [Constant::EN_ATTENTE, Constant::CONSOMME, Constant::EXPIRE]);

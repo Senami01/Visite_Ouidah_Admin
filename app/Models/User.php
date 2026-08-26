@@ -62,6 +62,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Sites_Touristiques::class, FieldName::CREATED_BY);
     }
+    public function sitesTouristiquesActeurMobile(): HasMany
+    {
+        return $this->hasMany(Sites_Touristiques::class, FieldName::ACTEUR_MOBILE_ID);
+    }
 
     public function role(): belongsTo
     {

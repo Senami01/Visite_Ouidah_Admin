@@ -28,7 +28,7 @@ class SitesTouristiquesResource extends JsonResource
                                                 ? new AdminResource($this->admninistrateur) 
                                                 : $this->{FieldName::CREATED_BY},    
             FieldName::ACTEUR_MOBILE_ID    => $this->relationLoaded('acteurMobile') 
-                                                ? new UtilisateursMobileResource($this->acteurMobile) 
+                                                ? $this->acteurMobile
                                                 : $this->{FieldName::ACTEUR_MOBILE_ID},
         ];
     }
