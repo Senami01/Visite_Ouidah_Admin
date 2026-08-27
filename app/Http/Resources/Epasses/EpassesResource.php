@@ -23,7 +23,7 @@ class EpassesResource extends JsonResource
             FieldName::ID => $this->{FieldName::ID},
             FieldName::REFERENCE => $this->{FieldName::REFERENCE},
             FieldName::TYPE_INITIATEUR => $this->{FieldName::TYPE_INITIATEUR},
-            FieldName::ACTEUR_MOBILE_ID => $this->relationLoaded('acteurMobile') ? $this->acteurMobile : null,
+            FieldName::ACTEUR_MOBILE_ID => $this->relationLoaded('acteurmobile') ? $this->acteurmobile : null,
             FieldName::VISITEUR_ID => $this->relationLoaded('visiteur') ? $this->visiteur : null,
             FieldName::STATUT => $this->{FieldName::STATUT},
             FieldName::MONTANT_HT => (float) $this->{FieldName::MONTANT_HT},

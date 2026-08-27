@@ -77,8 +77,26 @@ class Helper
                 $appliquerFiltreSite($query);
             }
         }
+        if (in_array(FieldName::PAYS, $configuration)
+            && method_exists($query->getModel(), 'personnes')
+            && $request->filled(FieldName::PAYS)
+        ) {
+            $pays = $request->input(FieldName::PAYS);
+
+            if ($pays !== 'all') {
+                $appliquerFiltrePays = function ($q) use ($pays) {
+                    $q->where(FieldName::PAYS, $pays);
+                };
+
+                $query->whereHas('personnes', $appliquerFiltrePays);
+                $query->with(['personnes' => $appliquerFiltrePays]);
+            }
+        }
         foreach ($configuration as $champ) {
-            if ($champ === FieldName::DATE_VISITE || $champ === FieldName::SITE_ID) {
+            if ($champ === FieldName::DATE_VISITE
+                || $champ === FieldName::SITE_ID
+                || ($champ === FieldName::PAYS && method_exists($query->getModel(), 'personnes'))
+            ) {
                 continue;
             }
 

@@ -18,12 +18,13 @@ class EpassesController extends BaseController
         FieldName::STATUT,
         FieldName::TYPE_INITIATEUR,
         FieldName::DATE_REALISATION,
+        FieldName::PAYS,
     ];
 
     public function index()
     {
         $requete = Epasses::with([
-            'acteurMobile',
+            'acteurmobile',
             'visiteur',
             'lignes',
             'personnes',
@@ -49,13 +50,15 @@ class EpassesController extends BaseController
      */
     public function show(string $id)
     {
-        $epasse = Epasses::with([
-            'acteurMobile',
+        $requete = Epasses::with([
+            'acteurmobile',
             'visiteur',
             'lignes',
             'personnes',
             'taxes',
-        ])->find($id);
+        ]);
+        $requete = Helper::filtrer($requete, $this->recherche);
+        $epasse = $requete->find($id);
 
         if (!$epasse) {
             return $this->sendError("E-pass non trouvé.", [], 404);
