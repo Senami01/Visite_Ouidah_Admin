@@ -54,10 +54,16 @@ class Sites_TouristiquesController extends BaseController
             $validation = $request->validated();
 
             try {
-                // 1. Création du site principal uniquement via Eloquent
-                $site = Sites_Touristiques::create($validation);
+                $siteData = $validation;
+                unset(
+                    $siteData['horaires'],
+                    $siteData['medias'],
+                    $siteData['tarifs'],
+                    $siteData['frais_supp']
+                );
 
-                // 2. Insertions séquentielles via les relations Eloquent (sans passer d'ID manuellement)
+                $site = Sites_Touristiques::create($siteData);
+
                 $this->enregistrerHoraires($site, $validation);
                 $this->enregistrerMedias($site, $validation);
                 $this->enregistrerTarifs($site, $validation);
@@ -79,7 +85,6 @@ class Sites_TouristiquesController extends BaseController
         private function enregistrerHoraires(Sites_Touristiques $site, array $data): void
         {
             if (isset($data['horaires']) && is_array($data['horaires'])) {
-                // 💡 Eloquent injecte automatiquement le site_id dans la table site_horaire
                 $site->horaires()->createMany($data['horaires']);
             }
         }
@@ -102,11 +107,10 @@ class Sites_TouristiquesController extends BaseController
         {
             if (isset($data['frais_supp']) && is_array($data['frais_supp'])) {
                 foreach ($data['frais_supp'] as $frais) {
-                    // 💡 Utilisation stricte de vos clés FieldName via la relation Eloquent
                     $site->fraisSupplementaires()->create([
-                        FieldName::LIBELLE => $frais['libelle'] ?? null, 
-                        FieldName::MONTANT => $frais['montant'] ?? 0,
-                        FieldName::PAR_EPASS => $frais['par_epass'] ?? false,
+                        FieldName::LIBELLE => $frais[FieldName::LIBELLE],
+                        FieldName::MONTANT => $frais[FieldName::MONTANT],
+                        FieldName::PAR_EPASS => $frais[FieldName::PAR_EPASS] ?? false,
                     ]);
                 }
             }

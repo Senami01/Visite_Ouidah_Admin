@@ -26,33 +26,54 @@ class StoreSitesRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            FieldName::NOM => 'required|string',
-            FieldName::CATEGORIE => 'required|string',
-            FieldName::LATITUDE => 'required|numeric',
-            FieldName::LONGITUDE => 'required|numeric',
-            FieldName::ACCES => 'required|string',
-            FieldName::COURTE_DESCRIPTION => 'required|string',
-            FieldName::A_PROPOS_TITRE => 'required|string',
-            FieldName::A_PROPOS_DESCRIPTION => 'required|string',
-            FieldName::CONSEILS_PRATIQUES => 'required|string',
-            FieldName::TYPE_TARIFICATION => ['required', Rule::in([Constant::UNIQUE, Constant::DOUBLE])],
-            FieldName::OUVERT_24_7 => 'required|boolean',
-            FieldName::STATUT => ['required', Rule::in([Constant::BROUILLON, Constant::PUBLIE, Constant::DESACTIVE])],
-            FieldName::ACTEUR_MOBILE_ID => ['required', 'uuid', Rule::exists(TableName::USERS, FieldName::ID)->where(function ($query) {
-                    $query->where(FieldName::TYPE, Constant::ACTEUR_MOBILE);})],
-            FieldName::CREATED_BY => ['required','uuid',Rule::exists(TableName::USERS, FieldName::ID)->where(function ($query) {
-                    $query->where(FieldName::TYPE, Constant::ADMINISTRATEUR);
-                }),
-            ],
-            FieldName::LIBELLE => 'required|string',
-            FieldName::MONTANT => 'required|numeric',
-            FieldName::CODE => 'nullable|string',
-            FieldName::SITE_ID => 'required|uuid|exists:' . TableName::SITES_TOURISTIQUES . ',' . FieldName::ID,
-            'montant_frais'=>'required|numeric',
-            'frais_supp.*.libelle' => 'nullable|string',
-            'frais_supp.*.montant' => 'nullable|numeric',
-        ];
+       return [
+    // 1. Informations du Site Touristique principal
+    FieldName::NOM => 'required|string',
+    FieldName::CATEGORIE => 'required|string',
+    FieldName::LATITUDE => 'required|numeric',
+    FieldName::LONGITUDE => 'required|numeric',
+    FieldName::ACCES => 'required|string',
+    FieldName::COURTE_DESCRIPTION => 'required|string',
+    FieldName::A_PROPOS_TITRE => 'required|string',
+    FieldName::A_PROPOS_DESCRIPTION => 'required|string',
+    FieldName::CONSEILS_PRATIQUES => 'required|string',
+    FieldName::TYPE_TARIFICATION => ['required', Rule::in([Constant::UNIQUE, Constant::DOUBLE])],
+    FieldName::OUVERT_24_7 => 'required|boolean',
+    FieldName::STATUT => ['required', Rule::in([Constant::BROUILLON, Constant::PUBLIE, Constant::DESACTIVE])],
+    
+    FieldName::ACTEUR_MOBILE_ID => ['required', 'uuid', Rule::exists(TableName::USERS, FieldName::ID)->where(function ($query) {
+        $query->where(FieldName::TYPE, Constant::ACTEUR_MOBILE);
+    })],
+    FieldName::CREATED_BY => ['required', 'uuid', Rule::exists(TableName::USERS, FieldName::ID)->where(function ($query) {
+        $query->where(FieldName::TYPE, Constant::ADMINISTRATEUR);
+    })],
+
+    // 2. Imbriqué : Site_Medias (Basé sur votre modèle)
+    'medias' => 'required|array|min:1',
+    'medias.*.' . FieldName::TYPE => 'required|string',
+    'medias.*.' . FieldName::URL => 'required|string',
+    'medias.*.' . FieldName::EST_COUVERTURE => 'required|boolean',
+    'medias.*.' . FieldName::ORDRE => 'required|integer',
+
+    // 3. Imbriqué : Site_Horaires (Basé sur votre modèle)
+    'horaires' => 'nullable|array',
+    'horaires.*.' . FieldName::JOUR => 'required|integer',
+    'horaires.*.' . FieldName::OUVERTURE => 'required|string',
+    'horaires.*.' . FieldName::FERMETURE => 'required|string',
+
+    // 4. Imbriqué : Site_Tarifs (Basé sur votre modèle)
+    'tarifs' => 'nullable|array',
+    'tarifs.*.' . FieldName::LIBELLE => 'required|string',
+    'tarifs.*.' . FieldName::CODE => 'nullable|string',
+    'tarifs.*.' . FieldName::MONTANT => 'required|numeric',
+
+    // 5. Imbriqué : Frais Supplémentaires (Si c'est votre 4ème table associée)
+    'frais_supp' => 'nullable|array',
+    'frais_supp.*.' . FieldName::LIBELLE => 'required|string',
+    'frais_supp.*.' . FieldName::MONTANT => 'required|numeric',
+    'frais_supp.*.' . FieldName::PAR_EPASS => 'sometimes|boolean',
+];
+
     }
 
     public function messages(): array
