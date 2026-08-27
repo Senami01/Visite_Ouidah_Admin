@@ -22,6 +22,7 @@ return new class extends Migration
             $table->enum(FieldName::TYPE_PIECE, [Constant::CNI, Constant::PASSEPORT, Constant::PERMIS, Constant::AUTRE]);
             $table->string(FieldName::NUMERO_PIECE);
             $table->string(FieldName::CATEGORIE);
+            $table->timestamps();
         });
     }
 

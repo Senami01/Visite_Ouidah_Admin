@@ -26,6 +26,7 @@ return new class extends Migration
             $table->decimal(FieldName::MONTANT_TOTAL, 10, 2);
             $table->timestamp(FieldName::DATE_CREATION);
             $table->date(FieldName::DATE_REALISATION);
+            $table->timestamps();
         });
     }
 

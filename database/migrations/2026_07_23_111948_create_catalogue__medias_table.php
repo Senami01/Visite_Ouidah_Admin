@@ -20,6 +20,7 @@ return new class extends Migration
             $table->enum(FieldName::TYPE,[Constant::IMAGE, Constant::VIDEO]);
             $table->string(FieldName::URL);
             $table->integer(FieldName::ORDRE);
+            $table->timestamps();
         });
     }
 

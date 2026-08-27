@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string(FieldName::JOUR);
             $table->time(FieldName::OUVERTURE);
             $table->time(FieldName::FERMETURE);
+            $table->timestamps();
         });
     }
 

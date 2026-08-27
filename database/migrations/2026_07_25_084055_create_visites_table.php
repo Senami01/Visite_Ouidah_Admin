@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignUuid(FieldName::VISITEUR_ID)->references(FieldName::ID)->on(TableName::VISITEURS)->cascadeOnDelete();
             $table->date(FieldName::DATE_VISITE);
             $table->enum(FieldName::STATUT, [Constant::PROGAMMEE, Constant::EN_COURS, Constant::EFFECTUEE, Constant::EN_RETARD, Constant::ANNULEE, Constant::ABSENTE]);
+            $table->timestamps();
         });
     }
 

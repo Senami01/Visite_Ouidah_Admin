@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string(FieldName::LIBELLE);
             $table->decimal(FieldName::MONTANT);
             $table->boolean(FieldName::PAR_EPASS)->default(false);
+            $table->timestamps();
         });
     }
 

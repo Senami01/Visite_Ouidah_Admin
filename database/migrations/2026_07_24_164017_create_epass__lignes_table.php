@@ -24,6 +24,7 @@ return new class extends Migration
             $table->decimal(FieldName::MONTANT, 10, 2);
             $table->date(FieldName::DATE_REALISATION);
             $table->enum(FieldName::STATUT, [Constant::PROGAMMEE, Constant::EN_COURS, Constant::EFFECTUEE, Constant::EN_RETARD, Constant::ANNULEE, Constant::ABSENTE]);
+            $table->timestamps();
         });
     }
 
