@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string(FieldName::URL);
             $table->boolean(FieldName::EST_COUVERTURE);
             $table->integer(FieldName::ORDRE);
+            $table->timestamps();
         });
     }
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignUuid(FieldName::TYPE_ABONNEMENT_ID)->references(FieldName::ID)->on(TableName::TYPES_ABONNEMENT)->cascadeOnDelete();
             $table->foreignUuid(FieldName::ACTEUR_REVERSEMENT_ID)->references(FieldName::ID)->on(TableName::ACTEURS_REVERSEMENT)->cascadeOnDelete();
             $table->decimal(FieldName::POURCENTAGE);
+            $table->timestamps();
         });
     }
 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string(FieldName::LIBELLE)->nullable();
             $table->string(FieldName::CODE)->nullable();
             $table->decimal(FieldName::MONTANT);
+            $table->timestamps();
         });
     }
 

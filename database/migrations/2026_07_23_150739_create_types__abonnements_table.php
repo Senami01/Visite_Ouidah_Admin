@@ -19,6 +19,7 @@ return new class extends Migration
             $table->decimal(FieldName::MONTANT);
             $table->integer(FieldName::DUREE_JOURS);
             $table->string(FieldName::COULEUR);
+            $table->timestamps();
         });
     }
 
