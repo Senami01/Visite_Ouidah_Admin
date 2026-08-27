@@ -85,4 +85,20 @@ class AdminController extends BaseController
         $admin->delete();
         return $this->sendResponse([], 'Administrateur supprimé avec succès.');
     }
+
+    public function statut($id)
+    {
+        $admin = User::findOrFail($id);
+        if ($admin->{FieldName::TYPE} !== 'administrateur') {
+            return $this->sendError("Action non autorisée pour ce type d'utilisateur.", [], 403);
+        }
+
+        $admin->{FieldName::STATUT} = !$admin->{FieldName::STATUT};
+        $admin->save();
+
+        $etat = $admin->{FieldName::STATUT} ? 'activé' : 'désactivé';
+        $message = "Le compte de l'administrateur a été {$etat} avec succès.";
+
+        return $this->sendResponse(new AdminResource($admin), $message);
+    }
 }
