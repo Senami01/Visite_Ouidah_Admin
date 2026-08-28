@@ -3,9 +3,6 @@
 namespace App\Http\Resources\Epasses;
 
 use App\Lib\FieldName;
-use App\Http\Resources\Epasses\EpassLigneResource;
-use App\Http\Resources\Epasses\EpassPersonneResource;
-use App\Http\Resources\Epasses\EpassTaxeResource;
 use Illuminate\Http\Request;
 
 use Illuminate\Http\Resources\Json\JsonResource;

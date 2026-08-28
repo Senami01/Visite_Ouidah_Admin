@@ -27,52 +27,47 @@ class StoreSitesRequest extends FormRequest
     public function rules(): array
     {
        return [
-    // 1. Informations du Site Touristique principal
-    FieldName::NOM => 'required|string',
-    FieldName::CATEGORIE => 'required|string',
-    FieldName::LATITUDE => 'required|numeric',
-    FieldName::LONGITUDE => 'required|numeric',
-    FieldName::ACCES => 'required|string',
-    FieldName::COURTE_DESCRIPTION => 'required|string',
-    FieldName::A_PROPOS_TITRE => 'required|string',
-    FieldName::A_PROPOS_DESCRIPTION => 'required|string',
-    FieldName::CONSEILS_PRATIQUES => 'required|string',
-    FieldName::TYPE_TARIFICATION => ['required', Rule::in([Constant::UNIQUE, Constant::DOUBLE])],
-    FieldName::OUVERT_24_7 => 'required|boolean',
-    FieldName::STATUT => ['required', Rule::in([Constant::BROUILLON, Constant::PUBLIE, Constant::DESACTIVE])],
-    
-    FieldName::ACTEUR_MOBILE_ID => ['required', 'uuid', Rule::exists(TableName::USERS, FieldName::ID)->where(function ($query) {
-        $query->where(FieldName::TYPE, Constant::ACTEUR_MOBILE);
-    })],
-    FieldName::CREATED_BY => ['required', 'uuid', Rule::exists(TableName::USERS, FieldName::ID)->where(function ($query) {
-        $query->where(FieldName::TYPE, Constant::ADMINISTRATEUR);
-    })],
+            FieldName::NOM => 'required|string',
+            FieldName::CATEGORIE => 'required|string',
+            FieldName::LATITUDE => 'required|numeric',
+            FieldName::LONGITUDE => 'required|numeric',
+            FieldName::ACCES => 'required|string',
+            FieldName::COURTE_DESCRIPTION => 'required|string',
+            FieldName::A_PROPOS_TITRE => 'required|string',
+            FieldName::A_PROPOS_DESCRIPTION => 'required|string',
+            FieldName::CONSEILS_PRATIQUES => 'required|string',
+            FieldName::TYPE_TARIFICATION => ['required', Rule::in([Constant::UNIQUE, Constant::DOUBLE])],
+            FieldName::OUVERT_24_7 => 'required|boolean',
+            FieldName::STATUT => ['required', Rule::in([Constant::BROUILLON, Constant::PUBLIE, Constant::DESACTIVE])],
+            
+            FieldName::ACTEUR_MOBILE_ID => ['required', 'uuid', Rule::exists(TableName::USERS, FieldName::ID)->where(function ($query) {
+                $query->where(FieldName::TYPE, Constant::ACTEUR_MOBILE);
+            })],
+            FieldName::CREATED_BY => ['required', 'uuid', Rule::exists(TableName::USERS, FieldName::ID)->where(function ($query) {
+                $query->where(FieldName::TYPE, Constant::ADMINISTRATEUR);
+            })],
 
-    // 2. Imbriqué : Site_Medias (Basé sur votre modèle)
-    'medias' => 'required|array|min:1',
-    'medias.*.' . FieldName::TYPE => 'required|string',
-    'medias.*.' . FieldName::URL => 'required|string',
-    'medias.*.' . FieldName::EST_COUVERTURE => 'required|boolean',
-    'medias.*.' . FieldName::ORDRE => 'required|integer',
+            'medias' => 'nullable|array',
+            'medias.*.' . FieldName::TYPE => 'required|string',
+            'medias.*.' . FieldName::URL => 'required|string',
+            'medias.*.' . FieldName::EST_COUVERTURE => 'required|boolean',
+            'medias.*.' . FieldName::ORDRE => 'required|integer',
 
-    // 3. Imbriqué : Site_Horaires (Basé sur votre modèle)
-    'horaires' => 'nullable|array',
-    'horaires.*.' . FieldName::JOUR => 'required|integer',
-    'horaires.*.' . FieldName::OUVERTURE => 'required|string',
-    'horaires.*.' . FieldName::FERMETURE => 'required|string',
+            'horaires' => 'nullable|array',
+            'horaires.*.' . FieldName::JOUR => 'required|string',
+            'horaires.*.' . FieldName::OUVERTURE => 'required|date_format:H:i',
+            'horaires.*.' . FieldName::FERMETURE => 'required|date_format:H:i',
 
-    // 4. Imbriqué : Site_Tarifs (Basé sur votre modèle)
-    'tarifs' => 'nullable|array',
-    'tarifs.*.' . FieldName::LIBELLE => 'required|string',
-    'tarifs.*.' . FieldName::CODE => 'nullable|string',
-    'tarifs.*.' . FieldName::MONTANT => 'required|numeric',
+            'tarifs' => 'nullable|array',
+            'tarifs.*.' . FieldName::LIBELLE => 'required|string',
+            'tarifs.*.' . FieldName::CODE => 'nullable|string',
+            'tarifs.*.' . FieldName::MONTANT => 'required|numeric',
 
-    // 5. Imbriqué : Frais Supplémentaires (Si c'est votre 4ème table associée)
-    'frais_supp' => 'nullable|array',
-    'frais_supp.*.' . FieldName::LIBELLE => 'required|string',
-    'frais_supp.*.' . FieldName::MONTANT => 'required|numeric',
-    'frais_supp.*.' . FieldName::PAR_EPASS => 'sometimes|boolean',
-];
+            'frais_supp' => 'nullable|array',
+            'frais_supp.*.' . FieldName::LIBELLE => 'required|string',
+            'frais_supp.*.' . FieldName::MONTANT => 'required|numeric',
+            'frais_supp.*.' . FieldName::PAR_EPASS => 'required|boolean',
+        ];
 
     }
 
@@ -91,7 +86,24 @@ class StoreSitesRequest extends FormRequest
             FieldName::A_PROPOS_DESCRIPTION . '.required' => 'La description "À propos" est requise.',
             FieldName::CONSEILS_PRATIQUES . '.required' => 'Les conseils pratiques sont requis.',
             FieldName::TYPE_TARIFICATION . '.required' => 'Le type de tarification est requis.',
-           
+            
+            'horaires.*.' . FieldName::JOUR . '.required' => 'Le jour de la semaine est obligatoire.',
+            'horaires.*.' . FieldName::OUVERTURE . '.required' => "L'heure d'ouverture est obligatoire.",
+            'horaires.*.' . FieldName::OUVERTURE . '.date_format' => "L'heure d'ouverture doit être au format HH:MM.",
+            'horaires.*.' . FieldName::FERMETURE . '.required' => 'Le heure de fermeture est obligatoire.',
+            'horaires.*.' . FieldName::FERMETURE . '.date_format' => 'Le heure de fermeture doit être au format HH:MM.',
+
+            'medias.*.' . FieldName::TYPE . '.required' => 'Le type de média (image/vidéo) est obligatoire.',
+            'medias.*.' . FieldName::URL . '.required' => "L'URL du média est obligatoire.",
+            'medias.*.' . FieldName::EST_COUVERTURE . '.boolean' => 'Le champ couverture doit être un booléen (vrai ou faux).',
+
+            'tarifs.*.' . FieldName::LIBELLE . '.required' => 'Le libellé du tarif est obligatoire.',
+            'tarifs.*.' . FieldName::MONTANT . '.required' => 'Le montant du tarif est obligatoire.',
+            'tarifs.*.' . FieldName::MONTANT . '.numeric' => 'Le montant du tarif doit être un nombre.',
+
+            'frais_supplementaires.*.' . FieldName::LIBELLE . '.required' => 'Le libellé des frais supplémentaires est obligatoire.',
+            'frais_supplementaires.*.' . FieldName::MONTANT . '.required' => 'Le montant des frais supplémentaires est obligatoire.',
+            'frais_supplementaires.*.' . FieldName::MONTANT . '.numeric' => 'Le montant des frais supplémentaires doit être un nombre.',
         ];
     }
 }
