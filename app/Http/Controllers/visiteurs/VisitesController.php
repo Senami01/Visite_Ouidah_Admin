@@ -18,14 +18,14 @@ class VisitesController extends BaseController
     ];
     public function index(string $id)
     {
-        $requete = Visites::where(FieldName::VISITEUR_ID, $id)
+        /*$requete = Visites::where(FieldName::VISITEUR_ID, $id)
             ->orderBy(FieldName::CREATED_AT, 'desc');
         $requete = Helper::filtrer($requete, $this->recherche);
         $page = $requete->paginate(env('PAGE'));
         $reponse = VisitesResource::collection($page)->toResponse(request())->getData();
         
         return $this->sendResponse($reponse, "Liste des visites récupérée avec succès.");
-    }
+    */}
 
 
     /**

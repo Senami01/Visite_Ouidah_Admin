@@ -11,6 +11,11 @@ use Illuminate\Http\Request;
 
 class VisiteursController extends BaseController
 {
+    protected $visitefiltre = [
+            FieldName::DATE_VISITE,
+            FieldName::STATUT,
+            FieldName::SITE_ID,
+    ];
     protected $recherche = [
             FieldName::DATE_VISITE,
             FieldName::PAYS,
@@ -28,10 +33,16 @@ class VisiteursController extends BaseController
 
     public function show($id)
     {
-        $visiteur = Visiteurs::find($id);
+        $visiteur = Visiteurs::withCount(['epasse', 'visite'])->find($id);
         if (!$visiteur) {
             return $this->sendError("Visiteur non trouvé.", [], 404);
         }
+
+        $visites = $visiteur->visite()->getQuery()
+            ->with(['epasse', 'siteTouristique', 'visiteur']);
+        $visites = Helper::filtrer($visites, $this->visitefiltre)->get();
+        $visiteur->setRelation('visite', $visites);
+
         return $this->sendResponse(new VisiteursResource($visiteur), 'Détails du visiteur récupérés avec succès.');
     }
 }

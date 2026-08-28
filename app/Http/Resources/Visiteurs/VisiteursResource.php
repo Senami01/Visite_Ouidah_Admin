@@ -22,6 +22,7 @@ class VisiteursResource extends JsonResource
             FieldName::TELEPHONE => $this->{FieldName::TELEPHONE},
             'epasses' => $this->epasse_count ?? 0,
             'visites' => $this->visite_count ?? 0,
+            'liste_visites' => VisitesResource::collection($this->whenLoaded('visite')),
         ];
     }
 }

@@ -16,8 +16,7 @@ class VisitesResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            FieldName::ID => $this->{FieldName::ID},
-            FieldName::EPASS_ID => $this->relationLoaded('epasse')? $this->epass : null,
+            FieldName::EPASS_ID => $this->relationLoaded('epasse')? $this->epasse : null,
             FieldName::SITE_ID => $this->relationLoaded('siteTouristique') ? $this->siteTouristique : null,
             FieldName::VISITEUR_ID => $this->relationLoaded('visiteur')? $this->visiteur : null,
             FieldName::DATE_VISITE => $this->{FieldName::DATE_VISITE}?->format('Y-m-d'),
