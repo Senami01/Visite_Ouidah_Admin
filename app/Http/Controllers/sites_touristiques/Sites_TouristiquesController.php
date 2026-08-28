@@ -50,70 +50,29 @@ class Sites_TouristiquesController extends BaseController
 
 
     public function store(StoreSitesRequest $request)
-        {   
-            $validation = $request->validated();
+    {
+        $validation = $request->validated();
+        $siteDonnee = collect($validation)->except(['horaires', 'medias', 'tarifs', 'frais_supp'])->toArray();
+        $site = Sites_Touristiques::create($siteDonnee);
 
-            try {
-                $siteData = $validation;
-                unset(
-                    $siteData['horaires'],
-                    $siteData['medias'],
-                    $siteData['tarifs'],
-                    $siteData['frais_supp']
-                );
-
-                $site = Sites_Touristiques::create($siteData);
-
-                $this->enregistrerHoraires($site, $validation);
-                $this->enregistrerMedias($site, $validation);
-                $this->enregistrerTarifs($site, $validation);
-                $this->enregistrerFraisSupplementaires($site, $validation);
-
-                return (new SitesTouristiquesResource($site))
-                    ->additional([
-                        'success' => true,
-                        'message' => "Site touristique et ses configurations enregistrés avec succès."
-                    ])
-                    ->response()
-                    ->setStatusCode(201);
-
-            } catch (\Exception $e) {
-                return $this->sendError("Erreur lors de la création du site touristique.", ['error' => $e->getMessage()], 500);
-            }
-        } 
-
-        private function enregistrerHoraires(Sites_Touristiques $site, array $data): void
-        {
-            if (isset($data['horaires']) && is_array($data['horaires'])) {
-                $site->horaires()->createMany($data['horaires']);
-            }
+        if (!empty($validation['horaires'])) {
+            $site->horaires()->createMany($validation['horaires']);
         }
 
-        private function enregistrerMedias(Sites_Touristiques $site, array $data): void
-        {
-            if (isset($data['medias']) && is_array($data['medias'])) {
-                $site->medias()->createMany($data['medias']);
-            }
+        if (!empty($validation['medias'])) {
+            $site->medias()->createMany($validation['medias']);
         }
 
-        private function enregistrerTarifs(Sites_Touristiques $site, array $data): void
-        {
-            if (isset($data['tarifs']) && is_array($data['tarifs'])) {
-                $site->tarifs()->createMany($data['tarifs']);
-            }
+        if (!empty($validation['tarifs'])) {
+            $site->tarifs()->createMany($validation['tarifs']);
         }
 
-        private function enregistrerFraisSupplementaires(Sites_Touristiques $site, array $data): void
-        {
-            if (isset($data['frais_supp']) && is_array($data['frais_supp'])) {
-                foreach ($data['frais_supp'] as $frais) {
-                    $site->fraisSupplementaires()->create([
-                        FieldName::LIBELLE => $frais[FieldName::LIBELLE],
-                        FieldName::MONTANT => $frais[FieldName::MONTANT],
-                        FieldName::PAR_EPASS => $frais[FieldName::PAR_EPASS] ?? false,
-                    ]);
-                }
-            }
+        if (!empty($validation['frais_supp'])) {
+            $site->fraisSupplementaires()->createMany($validation['frais_supp']);
+        }
+        $site->load(['horaires', 'medias', 'tarifs', 'fraisSupplementaires']);
+
+        return $this->sendResponse(new SitesTouristiquesResource($site), 'Site touristique et ses configurations enregistrés avec succès.',201);
     }
    
     public function show($id)
