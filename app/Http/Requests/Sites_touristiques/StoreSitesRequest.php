@@ -48,7 +48,7 @@ class StoreSitesRequest extends FormRequest
             })],
 
             'medias' => 'nullable|array',
-            'medias.*.' . FieldName::TYPE => 'required|string',
+            'medias.*.' . FieldName::TYPE => ['required', Rule::in([Constant::IMAGE, Constant::VIDEO])],
             'medias.*.' . FieldName::URL => 'required|string',
             'medias.*.' . FieldName::EST_COUVERTURE => 'required|boolean',
             'medias.*.' . FieldName::ORDRE => 'required|integer',

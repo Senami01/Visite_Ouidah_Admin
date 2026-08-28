@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\sites_touristiques;
 
 use App\Models\Sites_Touristiques;
-use Illuminate\Http\Request;
+use App\Http\Requests\Sites_touristiques\UpdateSiteRequest;
 use App\Http\Controllers\BaseController\BaseController;
 use App\Http\Requests\Sites_touristiques\StoreSitesRequest;
 use App\Http\Resources\Sites_Touristiques\SitesTouristiquesResource;
@@ -87,33 +87,86 @@ class Sites_TouristiquesController extends BaseController
         );
     }
 
-    public function update(Request $request, $id)
+
+public function update(UpdateSiteRequest $request, $id) 
+{ 
+    $site = Sites_Touristiques::find($id); 
+    
+    if (!$site) { 
+        return $this->sendError("Site touristique non trouvé.", [], 404); 
+    } 
+    $validatedData = $request->validated(); 
+
+    $siteData = $validatedData;
+    unset(
+        $siteData['horaires'],
+        $siteData['medias'],
+        $siteData['tarifs'],
+        $siteData['frais_supp']
+    );
+
+    $site->update($siteData);
+
+    $this->modifierHoraires($site, $validatedData);
+    $this->modifierMedias($site, $validatedData);
+    $this->modifierTarifs($site, $validatedData);
+    $this->modifierFraisSupplementaires($site, $validatedData);
+
+    $site->load(['horaires', 'medias', 'tarifs', 'fraisSupplementaires']);
+    
+    return $this->sendResponse( 
+        new SitesTouristiquesResource($site), 
+        "Site touristique modifié avec succès." 
+    ); 
+}
+
+    private function modifierHoraires(Sites_Touristiques $site, array $data): void
     {
-        if (!Str::isUuid($id)) {
-            return $this->sendError("Site touristique non trouvé.", [], 404);
+        if (!empty($data['horaires'])) {
+            foreach ($data['horaires'] as $horaire) {
+                $this->modifierRelation($site->horaires(), $horaire);
+            }
+        }
+    }
+
+    private function modifierMedias(Sites_Touristiques $site, array $data): void
+    {
+        if (!empty($data['medias'])) {
+            foreach ($data['medias'] as $media) {
+                $this->modifierRelation($site->medias(), $media);
+            }
+        }
+    }
+
+    private function modifierTarifs(Sites_Touristiques $site, array $data): void
+    {
+        if (!empty($data['tarifs'])) {
+            foreach ($data['tarifs'] as $tarif) {
+                $this->modifierRelation($site->tarifs(), $tarif);
+            }
+        }
+    }
+
+    private function modifierFraisSupplementaires(Sites_Touristiques $site, array $data): void
+    {
+        if (!empty($data['frais_supp'])) {
+            foreach ($data['frais_supp'] as $frais) {
+                $this->modifierRelation($site->fraisSupplementaires(), $frais);
+            }
+        }
+    }
+
+    private function modifierRelation($relation, array $donnee): void
+    {
+        $id = $donnee[FieldName::ID] ?? null;
+        unset($donnee[FieldName::ID]);
+
+        if ($id) {
+            $relation->where(FieldName::ID, $id)->update($donnee);
+            return;
         }
 
-        $site = Sites_Touristiques::find($id);
-        if (!$site) {
-            return $this->sendError("Site touristique non trouvé.", [], 404);
-        }
-
-        $validatedData = $request->validate([
-            FieldName::NOM => 'sometimes|required|string',
-            FieldName::CATEGORIE => 'nullable|string',
-            FieldName::LATITUDE => 'nullable|numeric',
-            FieldName::LONGITUDE => 'nullable|numeric',
-            FieldName::ACTEUR_MOBILE_ID => 'nullable|uuid',
-            FieldName::COURTE_DESCRIPTION => 'nullable|string',
-            FieldName::INDICATIONS => 'nullable|string',
-        ]);
-
-        $site->update($validatedData);
-        
-        return $this->sendResponse(
-            new SitesTouristiquesResource($site),
-            "Site touristique modifié avec succès."
-        );
+        $relation->create($donnee);
     }
 
     public function destroy($id)
