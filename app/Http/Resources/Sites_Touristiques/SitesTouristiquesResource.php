@@ -5,7 +5,6 @@ use App\Lib\FieldName;
 use App\Http\Resources\Administration\AdminResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\UtilisateursMobile\UtilisateursMobileResource;
 
 class SitesTouristiquesResource extends JsonResource
 {
@@ -30,6 +29,10 @@ class SitesTouristiquesResource extends JsonResource
             FieldName::ACTEUR_MOBILE_ID    => $this->relationLoaded('acteurMobile') 
                                                 ? $this->acteurMobile
                                                 : $this->{FieldName::ACTEUR_MOBILE_ID},
+            'horaires' => SiteHoraireResource::collection($this->whenLoaded('horaires')),
+            'medias' => SiteMediaResource::collection($this->whenLoaded('medias')),
+            'tarifs' => SiteTarifResource::collection($this->whenLoaded('tarifs')),
+            'frais_supplementaires' => SiteFraisSupplementaireResource::collection($this->whenLoaded('fraisSupplementaires')),
         ];
     }
 }
