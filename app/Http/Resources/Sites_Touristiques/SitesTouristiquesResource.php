@@ -29,6 +29,7 @@ class SitesTouristiquesResource extends JsonResource
             FieldName::ACTEUR_MOBILE_ID    => $this->relationLoaded('acteurMobile') 
                                                 ? $this->acteurMobile
                                                 : $this->{FieldName::ACTEUR_MOBILE_ID},
+            FieldName::STATUT => $this->{FieldName::STATUT},                                    
             'horaires' => SiteHoraireResource::collection($this->whenLoaded('horaires')),
             'medias' => SiteMediaResource::collection($this->whenLoaded('medias')),
             'tarifs' => SiteTarifResource::collection($this->whenLoaded('tarifs')),
