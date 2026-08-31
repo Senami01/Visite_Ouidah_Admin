@@ -31,7 +31,7 @@ class VisiteursController extends BaseController
         return $this->sendResponse($reponse, "Liste des visiteurs récupérée avec succès.");
     }
 
-    public function show($id)
+    public function show(string $id)
     {
         $visiteur = Visiteurs::withCount(['epasse', 'visite'])->find($id);
         if (!$visiteur) {

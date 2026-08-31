@@ -42,7 +42,7 @@ class AdminController extends BaseController
         return $this->sendResponse(new AdminResource($user), 'Administrateur créé avec succès.', 201);
     }
 
-    public function show($id)
+    public function show(string $id)
     {
         $admin = User::where(FieldName::ID, $id)->where(FieldName::TYPE, self::TYPE_ADMIN)->first();
         if (!$admin) {
@@ -52,7 +52,7 @@ class AdminController extends BaseController
         return $this->sendResponse(new AdminResource($admin), 'Administrateur récupéré avec succès.');
     }
 
-    public function update(UpdateAdminRequest $request, $id)
+    public function update(UpdateAdminRequest $request, string $id)
     {
         if (!Str::isUuid($id)) {
             return $this->sendError('Administrateur non trouvé.', [], 404);
@@ -74,7 +74,7 @@ class AdminController extends BaseController
         return $this->sendResponse(new AdminResource($admin), 'Administrateur mis à jour avec succès.');
     }
 
-     public function destroy($id)
+     public function destroy(string $id)
     {
         $admin = User::where(FieldName::ID, $id)->where(FieldName::TYPE, self::TYPE_ADMIN)->first();
 
@@ -86,7 +86,7 @@ class AdminController extends BaseController
         return $this->sendResponse([], 'Administrateur supprimé avec succès.');
     }
 
-    public function statut($id)
+    public function statut(string $id)
     {
         $admin = User::findOrFail($id);
         if ($admin->{FieldName::TYPE} !== 'administrateur') {

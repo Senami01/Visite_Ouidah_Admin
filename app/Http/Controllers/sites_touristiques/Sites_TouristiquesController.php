@@ -28,7 +28,7 @@ class Sites_TouristiquesController extends BaseController
         return $this->sendResponse($reponse, "Liste des sites touristiques récupérée avec succès.");
     }
 
-    public function changementStatus($id)
+    public function changementStatus(string $id)
     {
         if (!Str::isUuid($id)) {
             return $this->sendError("Site touristique non trouvé.", [], 404);
@@ -75,7 +75,7 @@ class Sites_TouristiquesController extends BaseController
         return $this->sendResponse(new SitesTouristiquesResource($site), 'Site touristique et ses configurations enregistrés avec succès.',201);
     }
    
-    public function show($id)
+    public function show(string $id)
     {
         $site = Sites_Touristiques::find($id);
         if (!$site) {
@@ -88,7 +88,7 @@ class Sites_TouristiquesController extends BaseController
     }
 
 
-public function update(UpdateSiteRequest $request, $id) 
+public function update(UpdateSiteRequest $request,string $id) 
 { 
     $site = Sites_Touristiques::find($id); 
     
@@ -156,7 +156,7 @@ public function update(UpdateSiteRequest $request, $id)
         }
     }
 
-    private function modifierRelation($relation, array $donnee): void
+    private function modifierRelation(mixed $relation, array $donnee): void
     {
         $id = $donnee[FieldName::ID] ?? null;
         unset($donnee[FieldName::ID]);
@@ -169,7 +169,7 @@ public function update(UpdateSiteRequest $request, $id)
         $relation->create($donnee);
     }
 
-    public function destroy($id)
+    public function destroy(string $id)
     {
         if (!Str::isUuid($id)) {
             return $this->sendError("Site touristique non trouvé.", [], 404);
