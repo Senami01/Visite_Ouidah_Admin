@@ -17,7 +17,6 @@ class EpassesResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            FieldName::ID => $this->{FieldName::ID},
             FieldName::REFERENCE => $this->{FieldName::REFERENCE},
             FieldName::TYPE_INITIATEUR => $this->{FieldName::TYPE_INITIATEUR},
             FieldName::ACTEUR_MOBILE_ID => $this->relationLoaded('acteurmobile') ? $this->acteurmobile : null,
